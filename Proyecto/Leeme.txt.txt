@@ -1,0 +1,22 @@
+Integrantes: Ramiro Gonzales, Mercado Leandro, Griffouliere Gerónimo, Giménez Jose, Bermudez Gabriel
+
+Titulo del tema propuesto: Luxury (Sistema de Gestión Hotelera)
+
+Resumen: 
+El grupo decidió de forma unánime el uso del lenguaje de programación Phyton en su versión 3.8.2,
+ya que se nos requirió utilizar un lenguaje que no sea conocido por nosotros,
+y todos coincidimos en que Phyton es un lenguaje que a todos nos gustaría aprender 
+e implementar en este proyecto.
+Y como entorno de programación elegimos Visual Studio Code ya que nos parece un entorno moderno,
+con un buen soporte y con muchas utilidades que pueden llegar a facilitarnos el aprendizaje y uso de este lenguaje.
+
+Decidimos hacer un proyecto de administración hotelera, porque teníamos ganas de crear algo que sea útil y que a la vez 
+nos generara un desafió y que fuera ambicioso, nos pareció una gran idea el hecho de pensar poder aplicarlo en futuros proyectos
+y la vez poder ponerlo como base en un currículum. Se nos ocurrió implementar un sistema de control de estacionamiento para poder controlar
+la cantidad de vehículos dentro del hotel, y así también saber cuantos espacios disponibles hay. Ademas, al final del día se puede controlar 
+el importe total que se obtuvo por cada tarifa extra que se le cobro al huésped por usar el estacionamiento.
+
+El concepto general del proyecto, nació de la conjunción de las ideas de cada uno de los integrantes, a todo esto hay que sumarle
+que en algún momento apareció la idea de hacer un juego, entonces decidimos implementar esa parte grafica en un sistema de administración
+que sea mas amigable o intuitivo para el usuario, y que a su vez, no presente tantas complicaciones al momento de llevar a cabo una tarea 
+como la gestión de un hotel.
