@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 class Registro:
     existeLabelNombre = False
     existeLabelApellido = False
@@ -8,94 +9,130 @@ class Registro:
     existeLabelUsuario = False
     existeLabelEmail = False
     existeLabelContra = False
-    def __init__ (self):
-        #creacion de ventana
+
+    def __init__(self):
+        # creacion de ventana
         self.ventanaRegistro = tk.Tk()
         self.ventanaRegistro.title("Registro")
 
-        #Ingreso de nombre
+        # Ingreso de nombre
         self.nombreLabel = tk.Label(self.ventanaRegistro, text="Nombre: ")
-        self.nombreLabel.grid(column = 0, row = 0)
+        self.nombreLabel.grid(column=0, row=0)
         self.nombreLabel.configure(foreground="black")
-        #Entrada de datos
+        # Entrada de datos
         self.datoNombre = tk.StringVar()
-        self.inputNombre = tk.Entry(self.ventanaRegistro, width= 20, textvariable=self.datoNombre)
-        self.inputNombre.grid(column = 1, row = 0)
+        self.inputNombre = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoNombre)
+        self.inputNombre.grid(column=1, row=0)
 
-        #Ingreso de apellido
+        # Ingreso de apellido
         self.apellidoLabel = tk.Label(self.ventanaRegistro, text="Apellido: ")
-        self.apellidoLabel.grid(column = 0, row = 1)
-        self.apellidoLabel.configure(foreground = "black")
-        #Entrada de datos(Apellido)
+        self.apellidoLabel.grid(column=0, row=1)
+        self.apellidoLabel.configure(foreground="black")
+        # Entrada de datos(Apellido)
         self.datoApellido = tk.StringVar()
-        self.inputApellido = tk.Entry(self.ventanaRegistro, width=20, textvariable= self.datoApellido)
-        self.inputApellido.grid(column= 1, row = 1)
+        self.inputApellido = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoApellido)
+        self.inputApellido.grid(column=1, row=1)
 
-        #Ingreso DNI
+        # Ingreso DNI
         self.dniLabel = tk.Label(self.ventanaRegistro, text="DNI: ")
-        self.dniLabel.grid(column = 0, row = 2)
-        self.dniLabel.configure(foreground = "black")
-        #Entrada de datos(DNI)
+        self.dniLabel.grid(column=0, row=2)
+        self.dniLabel.configure(foreground="black")
+        # Entrada de datos(DNI)
         self.datoDNI = tk.StringVar()
-        self.inputDNI = tk.Entry(self.ventanaRegistro, width = 20, textvariable = self.datoDNI)
-        self.inputDNI.grid(column = 1, row = 2)
+        self.inputDNI = tk.Entry(self.ventanaRegistro,width=20, textvariable=self.datoDNI)
+        self.inputDNI.grid(column=1, row=2)
 
-        #Ingreso telefono
-        self.telefonoLabel = tk.Label(self.ventanaRegistro, text= "Tel/cel: ")
-        self.telefonoLabel.grid(column = 0, row = 3)
-        self.telefonoLabel.configure(foreground = "black")
-        #Entrada de datos(Telefono)
+        # Ingreso telefono
+        self.telefonoLabel = tk.Label(self.ventanaRegistro, text="Tel/cel: ")
+        self.telefonoLabel.grid(column=0, row=3)
+        self.telefonoLabel.configure(foreground="black")
+        # Entrada de datos(Telefono)
         self.datoTelefono = tk.StringVar()
-        self.inputTelefono = tk.Entry(self.ventanaRegistro, width = 20, textvariable = self.datoTelefono)
-        self.inputTelefono.grid(column = 1, row = 3)
+        self.inputTelefono = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoTelefono)
+        self.inputTelefono.grid(column=1, row=3)
 
-        #Ingreso de nombre de usuario
-        self.usuarioLabel = tk.Label(self.ventanaRegistro, text = "Nombre de usuario: ")
-        self.usuarioLabel.grid(column = 0, row = 4)
-        self.usuarioLabel.configure(foreground = "black")
-        #Entrada de datos(nombre usuario)
+        # Ingreso de nombre de usuario
+        self.usuarioLabel = tk.Label(self.ventanaRegistro, text="Nombre de usuario: ")
+        self.usuarioLabel.grid(column=0, row=4)
+        self.usuarioLabel.configure(foreground="black")
+        # Entrada de datos(nombre usuario)
         self.datoUsuario = tk.StringVar()
-        self.inputUsuario = tk.Entry(self.ventanaRegistro, width = 20, textvariable = self.datoUsuario)
-        self.inputUsuario.grid(column = 1, row = 4)
+        self.inputUsuario = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoUsuario)
+        self.inputUsuario.grid(column=1, row=4)
 
-        #Ingreso de correo
-        self.correoLabel = tk.Label(self.ventanaRegistro, text = "Email: ")
-        self.correoLabel.grid(column = 0, row = 5)
-        self.correoLabel.configure(foreground = "black")
-        #Entrada de datos(Correo)
+        # Ingreso de correo
+        self.correoLabel = tk.Label(self.ventanaRegistro, text="Email: ")
+        self.correoLabel.grid(column=0, row=5)
+        self.correoLabel.configure(foreground="black")
+        # Entrada de datos(Correo)
         self.datoCorreo = tk.StringVar()
-        self.inputCorreo = tk.Entry(self.ventanaRegistro, width = 20, textvariable = self.datoCorreo)
-        self.inputCorreo.grid(column = 1, row = 5)
+        self.inputCorreo = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoCorreo)
+        self.inputCorreo.grid(column=1, row=5)
 
-        #Ingreso contraseña
-        self.passLabel = tk.Label(self.ventanaRegistro, text = "Contraseña: ")
-        self.passLabel.grid(column = 0, row = 6)
-        self.passLabel.configure(foreground = "black")
-        #entrada de datos(contraseña)
+        # Ingreso contraseña
+        self.passLabel = tk.Label(self.ventanaRegistro, text="Contraseña: ")
+        self.passLabel.grid(column=0, row=6)
+        self.passLabel.configure(foreground="black")
+        # entrada de datos(contraseña)
         self.datoPass = tk.StringVar()
-        self.inputPass = tk.Entry(self.ventanaRegistro, width = 20, textvariable = self.datoPass)
-        self.inputPass.grid(column = 1, row = 6)
+        self.inputPass = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoPass, show = "*")
+        self.inputPass.grid(column=1, row=6)
 
-        #Verificar contraseña
-        self.pswLabel = tk.Label(self.ventanaRegistro, text = "Reingresar contraseña: ")
-        self.pswLabel.grid(column = 0, row = 7)
-        self.pswLabel.configure(foreground = "black")
-        #entrada de datos(verificar contraseña)
+        # Verificar contraseña
+        self.pswLabel = tk.Label(self.ventanaRegistro, text="Reingresar contraseña: ")
+        self.pswLabel.grid(column=0, row=7)
+        self.pswLabel.configure(foreground="black")
+        # entrada de datos(verificar contraseña)
         self.datoPsw = tk.StringVar()
-        self.inputPsw = tk.Entry(self.ventanaRegistro, width = 20, textvariable = self.datoPsw)
-        self.inputPsw.grid(column = 1, row = 7)
+        self.inputPsw = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoPsw, show = "*")
+        self.inputPsw.grid(column=1, row=7)
 
-        #crear botón
-        self.botonRegistro = tk.Button(self.ventanaRegistro, text="Registrarse",command=self.Registrarse)
-        self.botonRegistro.grid(column = 1, row = 8)
+        # Label Nombre
+        self.errorLabelNombre = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelNombre.grid(column=2, row=0)
+        self.errorLabelNombre.configure(foreground="red")
 
+        # Label Apellido
+        self.errorLabelApellido = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelApellido.grid(column=2, row=1)
+        self.errorLabelApellido.configure(foreground="red")
+
+        # Label DNI
+        self.errorLabelDNI = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelDNI.grid(column=2, row=2)
+        self.errorLabelDNI.configure(foreground="red")
+
+        # Label tel/cel
+        self.errorLabelTel = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelTel.grid(column=2, row=3)
+        self.errorLabelTel.configure(foreground="red")
+
+        # Label Usuario
+        self.errorLabelUsuario = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelUsuario.grid(column=2, row=4)
+        self.errorLabelUsuario.configure(foreground="red")
+
+        # Label Correo
+        self.errorLabelCorreo = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelCorreo.grid(column=2, row=5)
+        self.errorLabelCorreo.configure(foreground="red")
+
+        # Label Contraseña
+        self.errorLabelContra = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelContra.grid(column=2, row=6)
+        self.errorLabelContra.configure(foreground="red")
+
+        # Label verificar
+        self.errorLabelVerificarPsw = tk.Label(self.ventanaRegistro, text=" ")
+        self.errorLabelVerificarPsw.grid(column=2, row=7)
+        self.errorLabelVerificarPsw.configure(foreground="red")
+
+        # crear botón
+        self.botonRegistro = tk.Button(self.ventanaRegistro, text="Registrarse", command=self.Registrarse)
+        self.botonRegistro.grid(column=1, row=8)
 
         self.ventanaRegistro.mainloop()
 
-
-
-
-    
     def Registrarse(self):
         self.nombre = self.datoNombre.get()
         self.apellido = self.datoApellido.get()
@@ -106,104 +143,92 @@ class Registro:
         self.nomUsuario1 = self.datoUsuario.get()
         self.email = self.datoCorreo.get()
         self.contra = self.datoPass.get()
+        self.largoContra = len(self.contra)
+        self.verificarPsw = self.datoPsw.get()
         self.condicion = 0
 
-        
-
-        #verificar nombre
-        if(self.nombre.isalpha() == False and self.existeLabelNombre != True):
-            self.errorLabelNombre = tk.Label(self.ventanaRegistro, text = "Nombre no válido")
-            self.errorLabelNombre.grid(column = 2, row = 0)
-            self.errorLabelNombre.configure(foreground = "red")
+        # verificar nombre['text']=
+        if(self.nombre.isalpha() == False):
             self.condicion = self.condicion - 1
-            self.existeLabelNombre=True
+            self.errorLabelNombre['text'] = "Nombre ingresado no válido"
 
-        if(self.nombre.isalpha()):
+        else:
             self.condicion = self.condicion + 1
-            if(self.existeLabelNombre):
-                self.errorLabelNombre.grid_remove()
-                self.existeLabelNombre=False
-        
-        #Verificar Apellido
-        if(self.apellido.isalpha() == False and self.existeLabelApellido != True):
-            self.errorLabelApellido = tk.Label(self.ventanaRegistro, text = "Apellido no válido")
-            self.errorLabelApellido.grid(column = 2, row = 1)
-            self.errorLabelApellido.configure(foreground = "red")
+            self.errorLabelNombre['text'] = " "
+
+        # Verificar Apellido
+        if(self.apellido.isalpha() == False):
             self.condicion = self.condicion - 1
-            self.existeLabelApellido = True
-        
-        if(self.apellido.isalpha()):
-            self.condicion = self.condicion + 1
-            if(self.existeLabelApellido):
-                self.errorLabelApellido.grid_remove()
-                self.existeLabelApellido = False
+            self.errorLabelApellido['text'] = "Apellido ingresado no válido"
 
-        
-        #Verificar DNI
-        if(self.dni.isdigit() == False or self.largo != 8 and self.existeLabelDNI != True ):
-            self.errorLabelDNI = tk.Label(self.ventanaRegistro, text = "DNI no válido")
-            self.errorLabelDNI.grid(column = 2, row = 2)
-            self.errorLabelDNI.configure(foreground = "red")
+        else:
+            self.condicion = self.condicion + 1
+            self.errorLabelApellido['text'] = " "
+
+        # Verificar DNI
+        if(self.dni.isdigit() == False or (self.largo > 8 or self.largo < 7)):
             self.condicion = self.condicion - 1
-            self.existeLabelDNI = True
-            
+            self.errorLabelDNI['text'] = "DNI ingresado no válido"
 
-        if(self.dni.isdigit() and (self.largo == 8 or self.largo == 7)):
+        else:
             self.condicion = self.condicion + 1
-            if(self.existeLabelDNI):
-                self.errorLabelDNI.grid_remove()
-                self.existeLabelDNI = False
+            self.errorLabelDNI['text'] = " "
 
-        
-        #VerificarTel/Cel
-        if(self.telCel.isdigit == False or self.largoTel != 10 and self.existeLabelTel != True):
-            self.errorLabelTel = tk.Label(self.ventanaRegistro, text = "Teléfono no válido")
-            self.errorLabelTel.grid(column = 2, row = 3)
-            self.errorLabelTel.configure(foreground = "red")
+        # VerificarTel/Cel
+        if(self.telCel.isdigit == False or self.largoTel != 10):
             self.condicion = self.condicion - 1
-            self.existeLabelTel = True
-        
-        if(self.telCel.isdigit() and (self.largoTel == 10)):
+            self.errorLabelTel['text'] = "Teléfono ingresado no válido"
+
+        else:
             self.condicion = self.condicion + 1
-            if(self.existeLabelTel):
-                self.errorLabelTel.grid_remove()
-                self.existeLabelTel = False
-        
-        
-        #Verificar Usuario
-        if(self.nomUsuario1.isalpha() == False and self.existeLabelUsuario != True):
-            self.errorLabelUsuario = tk.Label(self.ventanaRegistro, text = "Nombre de suario no válido")
-            self.errorLabelUsuario.grid(column = 2, row = 4)
-            self.errorLabelUsuario.configure(foreground = "red")
+            self.errorLabelTel['text'] = " "
+
+        # Verificar Usuario
+        if(self.nomUsuario1.isalpha() == False):
             self.condicion = self.condicion - 1
-            self.existeLabelUsuario = True
-        
-        if(self.nomUsuario1.isalpha()):
-            self.condicion = self.condicion + 1
-            if(self.existeLabelUsuario):
-                self.errorLabelUsuario.grid_remove()
-                self.existeLabelUsuario = False
-        
+            self.errorLabelUsuario['text'] = "Nombre de usuario no válido"
 
-        #Verificar Correo electrónico
-        if(("@" in self.email) == False or (".com" in self.email) == False or self.email.islower() == False or 
-        "," in self.email or "*" in self.email or "/" in self.email or "}" in self.email or "(" in self.email or ")" in self.email or
-        "{" in self.email or "|" in self.email or "!" in self.email or "[" in self.email or "=" in self.email or " " in self.email or
-        "]" in self.email or "#" in self.email or "$" in self.email or "%" in self.email or "&" in self.email or "|" in self.email or
-        "¿" in self.email or "?" in self.email or "'" in self.email or ";" in self.email or "<" in self.email or ">" in self.email or
-        "'" in self.email or "+" in self.email or "¡" in self.email or ":" in self.email and self.existeLabelEmail != True):
-            self.errorLabelCorreo = tk.Label(self.ventanaRegistro, text = "Dirección de correo no válida")
-            self.errorLabelCorreo.grid(column = 2, row = 5)
-            self.errorLabelCorreo.configure(foreground = "red")
+        else:
+            self.condicion = self.condicion + 1
+            self.errorLabelUsuario['text'] = " "
+
+        # Verificar Correo electrónico
+        if(("@" in self.email) == False or (".com" in self.email) == False or self.email.islower() == False or
+           "," in self.email or "*" in self.email or "/" in self.email or "}" in self.email or "(" in self.email or ")" in self.email or
+           "{" in self.email or "|" in self.email or "!" in self.email or "[" in self.email or "=" in self.email or " " in self.email or
+           "]" in self.email or "#" in self.email or "$" in self.email or "%" in self.email or "&" in self.email or "|" in self.email or
+           "¿" in self.email or "?" in self.email or "'" in self.email or ";" in self.email or "<" in self.email or ">" in self.email or
+           "'" in self.email or "+" in self.email or "¡" in self.email or ":" in self.email and self.existeLabelEmail != True):
             self.condicion = self.condicion - 1
-            self.existeLabelEmail = True
+            self.errorLabelCorreo['text'] = "Correo ingresado no válido"
 
-        if(("@" in self.email) == True and (".com" in self.email) == True and self.email.islower() == True):
+        else:
             self.condicion = self.condicion + 1
-            if(self.existeLabelEmail):
-                self.errorLabelCorreo.grid_remove()
-                self.existeLabelEmail = False
+            self.errorLabelCorreo['text'] = " "
 
+        # Verificar contraseña1
+        if(self.contra.isalnum() == False or self.largoContra < 8 or "@" in self.contra or "." in self.contra or "_" in self.contra or
+           "," in self.contra or "*" in self.contra or "/" in self.contra or "}" in self.contra or "(" in self.contra or
+           ")" in self.contra or "{" in self.contra or "|" in self.contra or "!" in self.contra or "[" in self.contra or
+           "=" in self.contra or " " in self.contra or "]" in self.contra or "#" in self.contra or "$" in self.contra or
+           "%" in self.contra or "&" in self.contra or "|" in self.contra or "¿" in self.contra or "?" in self.contra or
+           "'" in self.contra or ";" in self.contra or "<" in self.contra or ">" in self.contra or "'" in self.contra or
+           "+" in self.contra or "¡" in self.contra or ":" in self.contra and self.existeLabelContra == False):
+            self.condicion = self.condicion - 1
+            self.errorLabelContra['text'] = "Caracteres especiales no válidos"
+
+        else:
+            self.condicion = self.condicion + 1
+            self.errorLabelContra['text'] = " "
+
+        # Verificar verificar contraseña
+        if(self.verificarPsw != self.contra):
+            self.condicion = self.condicion - 1
+            self.errorLabelVerificarPsw['text'] = "La contraseña no coincide"
+
+        else:
+            self.condicion = self.condicion + 1
+            self.errorLabelVerificarPsw['text'] = " "
 
         print(self.condicion)
 
