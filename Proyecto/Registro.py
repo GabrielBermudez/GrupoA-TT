@@ -1,16 +1,12 @@
 import tkinter as tk
-
-
+import sqlite3
+import bcrypt
 class Registro:
-    existeLabelNombre = False
-    existeLabelApellido = False
-    existeLabelDNI = False
-    existeLabelTel = False
-    existeLabelUsuario = False
-    existeLabelEmail = False
-    existeLabelContra = False
-
+    
     def __init__(self):
+
+        self.usuarioCargado=False
+
         # creacion de ventana
         self.ventanaRegistro = tk.Tk()
         self.ventanaRegistro.title("Registro")
@@ -75,17 +71,19 @@ class Registro:
         self.passLabel.configure(foreground="black")
         # entrada de datos(contraseña)
         self.datoPass = tk.StringVar()
-        self.inputPass = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoPass, show = "*")
+        self.inputPass = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoPass, show="*")
         self.inputPass.grid(column=1, row=6)
-
+       
         # Verificar contraseña
         self.pswLabel = tk.Label(self.ventanaRegistro, text="Reingresar contraseña: ")
         self.pswLabel.grid(column=0, row=7)
         self.pswLabel.configure(foreground="black")
+
         # entrada de datos(verificar contraseña)
         self.datoPsw = tk.StringVar()
-        self.inputPsw = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoPsw, show = "*")
+        self.inputPsw = tk.Entry(self.ventanaRegistro, width=20, textvariable=self.datoPsw, show="*")
         self.inputPsw.grid(column=1, row=7)
+        
 
         # Label Nombre
         self.errorLabelNombre = tk.Label(self.ventanaRegistro, text=" ")
@@ -146,7 +144,16 @@ class Registro:
         self.largoContra = len(self.contra)
         self.verificarPsw = self.datoPsw.get()
         self.condicion = 0
+        sal = bcrypt.gensalt()
+        self.pass_hasheada = ""
+        self.pass_verif_hasheada = ""
+        print(self.nombre)
+        print(self.apellido)
+        print(self.dni)
+        print(self.email)
+        print(self.contra)
 
+           
         # verificar nombre['text']=
         if(self.nombre.isalpha() == False):
             self.condicion = self.condicion - 1
@@ -198,13 +205,15 @@ class Registro:
            "{" in self.email or "|" in self.email or "!" in self.email or "[" in self.email or "=" in self.email or " " in self.email or
            "]" in self.email or "#" in self.email or "$" in self.email or "%" in self.email or "&" in self.email or "|" in self.email or
            "¿" in self.email or "?" in self.email or "'" in self.email or ";" in self.email or "<" in self.email or ">" in self.email or
-           "'" in self.email or "+" in self.email or "¡" in self.email or ":" in self.email and self.existeLabelEmail != True):
+           "'" in self.email or "+" in self.email or "¡" in self.email or ":" in self.email):
             self.condicion = self.condicion - 1
             self.errorLabelCorreo['text'] = "Correo ingresado no válido"
 
         else:
             self.condicion = self.condicion + 1
             self.errorLabelCorreo['text'] = " "
+            
+            
 
         # Verificar contraseña1
         if(self.contra.isalnum() == False or self.largoContra < 8 or "@" in self.contra or "." in self.contra or "_" in self.contra or
@@ -213,16 +222,21 @@ class Registro:
            "=" in self.contra or " " in self.contra or "]" in self.contra or "#" in self.contra or "$" in self.contra or
            "%" in self.contra or "&" in self.contra or "|" in self.contra or "¿" in self.contra or "?" in self.contra or
            "'" in self.contra or ";" in self.contra or "<" in self.contra or ">" in self.contra or "'" in self.contra or
-           "+" in self.contra or "¡" in self.contra or ":" in self.contra and self.existeLabelContra == False):
+           "+" in self.contra or "¡" in self.contra or ":" in self.contra):
             self.condicion = self.condicion - 1
             self.errorLabelContra['text'] = "Caracteres especiales no válidos"
 
         else:
             self.condicion = self.condicion + 1
             self.errorLabelContra['text'] = " "
-
+            self.contra = self.contra.encode()
+            self.verificarPsw = self.verificarPsw.encode()
+            self.pass_hasheada = bcrypt.hashpw(self.contra, sal)
+            self.pass_verif_hasheada = bcrypt.hashpw(self.verificarPsw, sal)
         # Verificar verificar contraseña
-        if(self.verificarPsw != self.contra):
+        
+         
+        if(self.pass_hasheada != self.pass_verif_hasheada):
             self.condicion = self.condicion - 1
             self.errorLabelVerificarPsw['text'] = "La contraseña no coincide"
 
@@ -230,7 +244,31 @@ class Registro:
             self.condicion = self.condicion + 1
             self.errorLabelVerificarPsw['text'] = " "
 
-        print(self.condicion)
+        if(self.condicion == 8):
+            self.CargarEmpleado(self.nombre,self.apellido,self.dni,self.telCel,self.nomUsuario1,self.email,self.pass_hasheada)
 
+        
+    def CargarEmpleado(self,nombre,apellido,dni,telefono,usuario,correo,contraseña):
+        #Conexion a la base de datos!
+        try:
+            conexion = sqlite3.connect('empleadosDB.db')
+            print("Conexion establecida con la base de datos!")
+        
+        except sqlite3.OperationalError:
+            print("Error de conexion.")
 
-registro = Registro()
+        cursor = conexion.cursor()
+        try:
+            cursor.execute("INSERT INTO empleados(nombre,apellido,dni,telefono,usuario,email,contraseña) VALUES (?,?,?,?,?,?,?)", (nombre,apellido,dni,telefono,usuario,correo,contraseña))
+        except sqlite3.OperationalError:
+	        print("No se pudo insertar al empleado.")
+        else:
+            print("Se pudo insertar al empleado " + nombre + " " + apellido + " con exito en la base de datos.")
+            self.Close_VentanaRegistro
+
+        conexion.commit()
+        conexion.close()
+    
+
+    def Close_VentanaRegistro(self):
+        self.ventanaRegistro.destroy()

@@ -39,6 +39,7 @@ def InsertarUsuario(nombre, apellido, dni, telefono, usuario, email, password):
     cursor = conexion.cursor()
     try:
         cursor.execute("INSERT INTO empleados(nombre,apellido,dni,telefono,usuario,email,contraseña) VALUES (?,?,?,?,?,?,?)", (nombre,apellido,dni,telefono,usuario,email,password))
+        self
     except sqlite3.OperationalError:
 	    print("No se pudo insertar al empleado.")
     else:

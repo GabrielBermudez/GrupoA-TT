@@ -1,10 +1,17 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
+import bcrypt
 import sqlite3
-class Login:
-    def __init__ (self):
-        #Creacion de la ventana
+
+class Ingreso:
+    def __init__(self):
+        self.datoUsuario=""
+        self.datoPassword=""
+        
+
+    def FrontLogin(self, datoUsuario,datoPassword):
+          #Creacion de la ventana
         self.ventanaLogin = tk.Tk()
         self.ventanaLogin.title("Login")
         self.ventanaLogin.geometry("400x300")
@@ -16,26 +23,25 @@ class Login:
         self.ventanaLogin.resizable(0,0)
         self.labelFrameLogin=ttk.LabelFrame(self.ventanaLogin, text="Login:")        
         self.labelFrameLogin.place(x=55, y=60, width=300, height=150)
-        
-        self.FrontLogin()
-        self.ventanaLogin.mainloop()
 
-    def FrontLogin(self):
          #Label Usuario
         self.labelUsuario = ttk.Label(self.labelFrameLogin, text="Usuario o Email: ")
         self.labelUsuario.grid(column=1, row=1, padx=4, pady=4)
         self.labelUsuario.configure(foreground="black")
 
+        
         self.datoUsuario=tk.StringVar()
         self.inputUsuario=ttk.Entry(self.labelFrameLogin, width=15, textvariable=self.datoUsuario)
         self.inputUsuario.grid(column=2, row=1, padx=4, pady=4)
+        print(self.datoUsuario.get())
+        
         
         #Label Pass
         self.labelPass = ttk.Label(self.labelFrameLogin, text="Password: ")
         self.labelPass.grid(column=1, row=2, padx=4, pady=4)
         self.labelPass.configure(foreground="black")
 
-        self.datoPassword=tk.StringVar()
+        self.datoPassword=tk.StringVar()     
         self.inputPassword=ttk.Entry(self.labelFrameLogin, width=15, textvariable=self.datoPassword, show="*")
         self.inputPassword.grid(column=2, row=2, padx=4, pady=4)
 
@@ -47,22 +53,29 @@ class Login:
         self.botonSalir=tk.Button(self.labelFrameLogin, text="Salir", command=self.Close_VentanaLogin, background="#FF0000", activebackground="#E91212")
         self.botonSalir.place(x=120, y=80, width=70, height=40)
 
-    def LogicaLogin(self):
+        self.ventanaLogin.mainloop()
 
+    def LogicaLogin(self):
+       
         self.correoInput = self.datoUsuario.get()
         self.contraseñaInput = self.datoPassword.get()
+        self.contraseñaInput = self.contraseñaInput.encode()
 
         self.conexion= sqlite3.connect('empleadosDB.db')
         self.cursor=self.conexion.cursor()
         self.cursor.execute("SELECT usuario, email, contraseña FROM empleados WHERE usuario=? OR email=?",(self.correoInput, self.correoInput))
         self.datos=self.cursor.fetchone()
         
-        if(self.datos and ((self.correoInput == self.datos[0] or self.correoInput == self.datos[1]) and self.contraseñaInput == self.datos[2])):
+        #borrar luego
+        print(self.correoInput)
+        print(self.contraseñaInput)
+
+        if(self.datos and ((self.correoInput == self.datos[0] or self.correoInput == self.datos[1]) and bcrypt.checkpw(self.contraseñaInput, self.datos[2]))):
             print("Bienvenido")
         else:
             print("Datos Incorrectos")
-
     def Close_VentanaLogin(self):
         self.ventanaLogin.destroy()
 
-login = Login()
+#login = Ingreso()
+#login.FrontLogin(" ","")
