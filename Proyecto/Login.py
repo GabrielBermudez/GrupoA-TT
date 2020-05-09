@@ -3,16 +3,15 @@ from tkinter import ttk
 from tkinter import *
 import bcrypt
 import sqlite3
+from tkinter import messagebox as mb
 
 class Ingreso:
-    def __init__(self):
-        self.datoUsuario=""
-        self.datoPassword=""
-        
+       
 
-    def FrontLogin(self, datoUsuario,datoPassword):
+    def __init__(self, ventanaPrincipal):
+        self.auxiliar=False
           #Creacion de la ventana
-        self.ventanaLogin = tk.Tk()
+        self.ventanaLogin = tk.Toplevel(ventanaPrincipal)
         self.ventanaLogin.title("Login")
         self.ventanaLogin.geometry("400x300")
         self.frameTitulo=ttk.Label(self.ventanaLogin, text="Luxury")
@@ -33,7 +32,6 @@ class Ingreso:
         self.datoUsuario=tk.StringVar()
         self.inputUsuario=ttk.Entry(self.labelFrameLogin, width=15, textvariable=self.datoUsuario)
         self.inputUsuario.grid(column=2, row=1, padx=4, pady=4)
-        print(self.datoUsuario.get())
         
         
         #Label Pass
@@ -46,16 +44,18 @@ class Ingreso:
         self.inputPassword.grid(column=2, row=2, padx=4, pady=4)
 
         #Boton Ingresar
-        self.botonIngresar=tk.Button(self.labelFrameLogin, text="Ingresar", command=self.LogicaLogin, background="#1BFF00", activebackground="#29DC13")
+        self.botonIngresar=tk.Button(self.labelFrameLogin, text="Ingresar", command=lambda: self.LogicaLogin(ventanaPrincipal), background="#1BFF00", activebackground="#29DC13")
         self.botonIngresar.place(x=40, y=80, width=70, height=40)
 
         #Boton Salir
         self.botonSalir=tk.Button(self.labelFrameLogin, text="Salir", command=self.Close_VentanaLogin, background="#FF0000", activebackground="#E91212")
         self.botonSalir.place(x=120, y=80, width=70, height=40)
 
+        self.ventanaLogin.grab_set()
+        
         self.ventanaLogin.mainloop()
 
-    def LogicaLogin(self):
+    def LogicaLogin(self,ventanaPrincipal):
        
         self.correoInput = self.datoUsuario.get()
         self.contraseñaInput = self.datoPassword.get()
@@ -65,13 +65,11 @@ class Ingreso:
         self.cursor=self.conexion.cursor()
         self.cursor.execute("SELECT usuario, email, contraseña FROM empleados WHERE usuario=? OR email=?",(self.correoInput, self.correoInput))
         self.datos=self.cursor.fetchone()
-        
-        #borrar luego
-        print(self.correoInput)
-        print(self.contraseñaInput)
 
         if(self.datos and ((self.correoInput == self.datos[0] or self.correoInput == self.datos[1]) and bcrypt.checkpw(self.contraseñaInput, self.datos[2]))):
-            print("Bienvenido")
+            mb.showinfo("Bienvenido", "Bienvenido al sistema de Administracion Hotelera Luxury")
+            self.ventanaLogin.destroy()
+            ventanaPrincipal.destroy()
         else:
             print("Datos Incorrectos")
     def Close_VentanaLogin(self):

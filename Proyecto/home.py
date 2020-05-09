@@ -7,12 +7,10 @@ import time
 from datetime import date
 from Login import Ingreso
 from Registro import Registro
+
 class Luxury:
-    login = Ingreso()
-    
+
     def FrontHome(self):
-        self.datoUsua=self.login.inputUsuario
-        self.datoPass=self.login.inputPassword
         #creacion de la ventana
         self.ventanaHome = tk.Tk()
         self.ventanaHome.title("LUXURY")
@@ -23,10 +21,10 @@ class Luxury:
         self.frameTitulo.pack(anchor=CENTER)
 
         #creacion de los botones(sin asignar una funcion aun)
-        self.botonIngresar=tk.Button(self.ventanaHome, text="Ingresar", command= lambda:self.login.FrontLogin(self.datoUsua,self.datoPass))
+        self.botonIngresar=tk.Button(self.ventanaHome, text="Ingresar", command= self.AbrirLogin)
         self.botonIngresar.place(x=600, y=130, width=120, height=70)
         
-        self.botonRegistrarse=tk.Button(self.ventanaHome, text="Registrarse", command= lambda:Registro())
+        self.botonRegistrarse=tk.Button(self.ventanaHome, text="Registrarse", command= lambda:self.AbrirRegistro())
         self.botonRegistrarse.place(x=600, y=230, width=120, height=70)
 
         #creacion de label
@@ -42,7 +40,6 @@ class Luxury:
         self.hora1.configure(foreground="red")
         self.tiempo() 
 
-        
         self.ventanaHome.mainloop()
     
     def tiempo(self):
@@ -50,9 +47,20 @@ class Luxury:
         self.hora1.config(text=self.hora, fg="red")
         self.hora1.after(200,self.tiempo)
 
+    def AbrirLogin(self):
+        login=Ingreso(self.ventanaHome)
+        
+        
+        
 
+    def AbrirRegistro(self):
+        registro=Registro(self.ventanaHome)
+    
 
-     
 luxury = Luxury()
 luxury.FrontHome()
 
+
+
+
+     

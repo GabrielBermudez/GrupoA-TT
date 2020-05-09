@@ -3,12 +3,12 @@ import sqlite3
 import bcrypt
 class Registro:
     
-    def __init__(self):
+    def __init__(self,ventanaPrincipal):
 
         self.usuarioCargado=False
 
         # creacion de ventana
-        self.ventanaRegistro = tk.Tk()
+        self.ventanaRegistro = tk.Toplevel(ventanaPrincipal)
         self.ventanaRegistro.title("Registro")
 
         # Ingreso de nombre
