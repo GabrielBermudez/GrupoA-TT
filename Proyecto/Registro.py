@@ -1,10 +1,13 @@
 import tkinter as tk
+import sqlite3 
+import bcrypt
+from tkinter import messagebox as mb
 
 class Registro:
 
-    def __init__(self):
+    def __init__(self,ventanaPrincipal):
         # creacion de ventana
-        self.ventanaRegistro = tk.Tk()
+        self.ventanaRegistro = tk.Toplevel(ventanaPrincipal)
         self.ventanaRegistro.geometry("600x330")
         self.ventanaRegistro.resizable(0, 0)
         self.ventanaRegistro.title("Registro")
@@ -152,6 +155,9 @@ class Registro:
         self.largoContra = len(self.contra)
         self.verificarPsw = self.datoPsw.get()
         self.condicion = 0
+        sal = bcrypt.gensalt()
+        self.pass_hasheada = ""
+        self.pass_verif_hasheada = ""
 
         # verificar nombre['text']=
         if(self.nombre.isalpha() == False):
@@ -213,23 +219,29 @@ class Registro:
             self.condicion = self.condicion + 1
             self.errorLabelCorreo['text'] = " "
 
+       
         # Verificar contraseña1
         if(self.contra.isalnum() == False or self.largoContra < 8 or "@" in self.contra or "." in self.contra or "_" in self.contra or
-        "," in self.contra or "*" in self.contra or "/" in self.contra or "}" in self.contra or "(" in self.contra or
-        ")" in self.contra or "{" in self.contra or "|" in self.contra or "!" in self.contra or "[" in self.contra or
-        "=" in self.contra or " " in self.contra or "]" in self.contra or "#" in self.contra or "$" in self.contra or
-        "%" in self.contra or "&" in self.contra or "|" in self.contra or "¿" in self.contra or "?" in self.contra or
-        "'" in self.contra or ";" in self.contra or "<" in self.contra or ">" in self.contra or "'" in self.contra or
-        "+" in self.contra or "¡" in self.contra or ":" in self.contra and self.existeLabelContra == False):
+           "," in self.contra or "*" in self.contra or "/" in self.contra or "}" in self.contra or "(" in self.contra or
+           ")" in self.contra or "{" in self.contra or "|" in self.contra or "!" in self.contra or "[" in self.contra or
+           "=" in self.contra or " " in self.contra or "]" in self.contra or "#" in self.contra or "$" in self.contra or
+           "%" in self.contra or "&" in self.contra or "|" in self.contra or "¿" in self.contra or "?" in self.contra or
+           "'" in self.contra or ";" in self.contra or "<" in self.contra or ">" in self.contra or "'" in self.contra or
+           "+" in self.contra or "¡" in self.contra or ":" in self.contra):
             self.condicion = self.condicion - 1
             self.errorLabelContra['text'] = "Caracteres especiales no válidos"
 
         else:
             self.condicion = self.condicion + 1
             self.errorLabelContra['text'] = " "
-
+            self.contra = self.contra.encode()
+            self.verificarPsw = self.verificarPsw.encode()
+            self.pass_hasheada = bcrypt.hashpw(self.contra, sal)
+            self.pass_verif_hasheada = bcrypt.hashpw(self.verificarPsw, sal)
         # Verificar verificar contraseña
-        if(self.verificarPsw != self.contra):
+        
+         
+        if(self.pass_hasheada != self.pass_verif_hasheada):
             self.condicion = self.condicion - 1
             self.errorLabelVerificarPsw['text'] = "La contraseña no coincide"
 
@@ -237,7 +249,32 @@ class Registro:
             self.condicion = self.condicion + 1
             self.errorLabelVerificarPsw['text'] = " "
 
-    def cerrarVentana(self):
-        self.ventanaRegistro.destroy()
+        if(self.condicion == 8):
+            self.CargarEmpleado(self.nombre,self.apellido,self.dni,self.telCel,self.nomUsuario1,self.email,self.pass_hasheada)
 
-registro = Registro()
+        
+    def CargarEmpleado(self,nombre,apellido,dni,telefono,usuario,correo,contraseña):
+        #Conexion a la base de datos!
+        try:
+            conexion = sqlite3.connect('empleadosDB.db')
+            print("Conexion establecida con la base de datos!")
+        
+        except sqlite3.OperationalError:
+            print("Error de conexion.")
+
+        cursor = conexion.cursor()
+        try:
+            cursor.execute("INSERT INTO empleados(nombre,apellido,dni,telefono,usuario,email,contraseña) VALUES (?,?,?,?,?,?,?)", (nombre,apellido,dni,telefono,usuario,correo,contraseña))
+        except sqlite3.OperationalError:
+	        print("No se pudo insertar al empleado.")
+        else:
+            print("Se pudo insertar al empleado " + nombre + " " + apellido + " con exito en la base de datos.")
+            mb.showinfo("Registro","Se pudo insertar al empleado " + nombre + " " + apellido + " con exito en la base de datos.")
+            self.Close_VentanaRegistro()
+
+        conexion.commit()
+        conexion.close()
+    
+
+    def Close_VentanaRegistro(self):
+        self.ventanaRegistro.destroy()

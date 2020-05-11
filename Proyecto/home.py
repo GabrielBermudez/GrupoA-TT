@@ -24,7 +24,7 @@ class Luxury:
         self.botonIngresar=tk.Button(self.ventanaHome, text="Ingresar", command= self.AbrirLogin)
         self.botonIngresar.place(x=600, y=130, width=120, height=70)
         
-        self.botonRegistrarse=tk.Button(self.ventanaHome, text="Registrarse", command= lambda:self.AbrirRegistro())
+        self.botonRegistrarse=tk.Button(self.ventanaHome, text="Registrarse", command= self.AbrirRegistro)
         self.botonRegistrarse.place(x=600, y=230, width=120, height=70)
 
         #creacion de label
