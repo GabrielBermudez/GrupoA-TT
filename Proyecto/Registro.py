@@ -137,7 +137,7 @@ class Registro:
         self.botonRegistro = tk.Button(self.ventanaRegistro, text="Registrarse",command=self.Registrarse, background="#5FBD94", activebackground="#6BD8A9")
         self.botonRegistro.place(x=200, y=280, width=120, height=40)
 
-        self.botonCerrar = tk.Button(self.ventanaRegistro, text="Salir", command=self.cerrarVentana, background="#D76458", activebackground="#FF7A6C")
+        self.botonCerrar = tk.Button(self.ventanaRegistro, text="Salir", command=self.Close_VentanaRegistro, background="#D76458", activebackground="#FF7A6C")
         self.botonCerrar.place(x=450, y=280, width=120, height=40)
 
         self.ventanaRegistro.mainloop()
@@ -211,7 +211,7 @@ class Registro:
         "{" in self.email or "|" in self.email or "!" in self.email or "[" in self.email or "=" in self.email or " " in self.email or
         "]" in self.email or "#" in self.email or "$" in self.email or "%" in self.email or "&" in self.email or "|" in self.email or
         "¿" in self.email or "?" in self.email or "'" in self.email or ";" in self.email or "<" in self.email or ">" in self.email or
-        "'" in self.email or "+" in self.email or "¡" in self.email or ":" in self.email and self.existeLabelEmail != True):
+        "'" in self.email or "+" in self.email or "¡" in self.email or ":" in self.email):
             self.condicion = self.condicion - 1
             self.errorLabelCorreo['text'] = "Correo ingresado no válido"
 
