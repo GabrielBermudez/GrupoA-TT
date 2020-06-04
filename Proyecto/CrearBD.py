@@ -175,5 +175,7 @@ InsertarHabitacion(3,"5","Si",25.50,"No","No","No", "Comun")
 """
 
 
-#InsertarCliente("Leandra","Malandra","50457890","261666999","leandra@malandra.com","Av Las Putas 666", 1945-6-15,"Putona","Con el culo",10,"No tiene, es pobre",2020-5-1-15-21-7,2020-5-11-20-15-7)
+#InsertarCliente("Leandra","Malandra","50457890","261666999","leandra@malandra.com","Av Las Putas 666", "1945-06-15","Putona","Con el culo",10,"No tiene, es pobre","2020-06-01 21:07:30","2020-06-05 20:15:7")
+InsertarCliente("Ramiro","Gonzales","38234765","2614578923","ramiro@malandra.com","Lujan de Cuyo", "1994-06-15","Argentina","Tarjeta Credito",7,"UHM365","2020-06-11 21:07:30","2020-06-18 20:15:7")
+InsertarCliente("Gabriel","Bermudez","39237216","2614269628","gabriel@malandra.com","Niñas de Ayohuma 1395", "1995-10-06","Argentina","Efectivo",5,"ARK246","2020-06-10 21:07:30","2020-06-15 20:15:07")
 #SELECT * FROM habitaciones, clientes WHERE clientes.id == habitaciones.id_Cliente;

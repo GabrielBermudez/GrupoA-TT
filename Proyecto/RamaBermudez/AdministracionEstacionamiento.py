@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 from tkinter import scrolledtext as st
+import sqlite3
 
 class Estacionamiento:
     
@@ -72,10 +73,17 @@ class Estacionamiento:
         self.datosCliente=st.ScrolledText(self.frameDatos, width=55, height=12, state="disabled")
         self.datosCliente.place(x=20,y=120) 
         
+        self.datoAparcamiento=tk.StringVar()
+        self.inputAparcamiento=ttk.Entry(self.frameDatos, width=15, textvariable=self.datoAparcamiento)
+        self.inputAparcamiento.place(x=70, y=340, width=40, height=40)   
+
+        self.botonBuscar=tk.Button(self.frameDatos,text="Buscar", bg="green", font=("Verdana",15), command=self.BuscarCliente)
+        self.botonBuscar.place(x=300,y=60, width=90,height=40)
+
         self.botonAsignar=tk.Button(self.frameDatos,text="Asignar", bg="green", font=("Verdana",18))
         self.botonAsignar.place(x=130,y=340, width=100,height=50)
 
-        self.botonLimpiar=tk.Button(self.frameDatos,text="Limpiar", bg="red", font=("Verdana",18))
+        self.botonLimpiar=tk.Button(self.frameDatos,text="Limpiar", bg="red", font=("Verdana",18), command=self.LimpiarDatosCliente)
         self.botonLimpiar.place(x=260,y=340, width=100,height=50)
 
 
@@ -130,6 +138,37 @@ class Estacionamiento:
 
     def MainLoop(self):
         self.ventanaHome.mainloop()
+
+    def BuscarCliente(self):
+        self.dni=self.datoDni.get()
+        self.conexion= sqlite3.connect('empleadosDB.db')
+        self.cursor=self.conexion.cursor()
+        self.cursor.execute("SELECT * FROM clientes WHERE dni=?", (self.dni,))
+        self.datos=self.cursor.fetchone()
+        print(self.datos)
+
+        if(self.datos):
+            self.mensaje=("Nombre: " + self.datos[1] + "\nApellido: " + self.datos[2] + "\nDNI: " + self.datos[3]
+                        + "\nTelefono: " + self.datos[4] + "\nCorreo: " + self.datos[5] + "\nDireccion: " 
+                        + self.datos[6] + "\nFecha de Nacimiento: " + self.datos[7] + "\nNacionalidad: " 
+                        + self.datos[8] + "\nMetodo de Pago: " + self.datos[9] + "\nEstadia: " 
+                        + str(self.datos[10]) + "\nPatente: " + self.datos[11] + "\nCheckIn: " 
+                        + self.datos[12] + "\nCheckOut: " + self.datos[13])
+                        
+           
+            self.datosCliente["state"]="normal"
+            self.datosCliente.delete(1.0,END)
+            self.datosCliente.insert(tk.INSERT,self.mensaje)
+            self.datosCliente["state"]="disabled"
+        else:
+            self.datosCliente["state"]="normal"
+            self.datosCliente.insert(tk.INSERT,"No se encontro al cliente solicitado!")
+            self.datosCliente["state"]="disabled"
         
+    def LimpiarDatosCliente(self):
+        self.datosCliente["state"]="normal"
+        self.datosCliente.delete(1.0,END)
+        self.datosCliente["state"]="disabled"
+
 estacionamiento = Estacionamiento()
 
