@@ -205,20 +205,24 @@ class Registro:
             self.errorLabelUsuario['text'] = " "
 
         # Verificar Correo electrónico
-        if(("@" in self.email) == False or (".com" in self.email) == False or self.email.islower() == False or
-        (".ar" in self.email == False) or ".gov" in self.email == False or ".gob" in self.email == False or ".edu" in self.email == False or
-        "," in self.email or "*" in self.email or "/" in self.email or "}" in self.email or "(" in self.email or ")" in self.email or
-        "{" in self.email or "|" in self.email or "!" in self.email or "[" in self.email or "=" in self.email or " " in self.email or
-        "]" in self.email or "#" in self.email or "$" in self.email or "%" in self.email or "&" in self.email or "|" in self.email or
-        "¿" in self.email or "?" in self.email or "'" in self.email or ";" in self.email or "<" in self.email or ">" in self.email or
-        "'" in self.email or "+" in self.email or "¡" in self.email or ":" in self.email):
+        emailValido = True
+        for i in self.email:
+            if(i.isalpha() and i.islower()):
+                emailValido = True
+            elif(i.isdigit()):
+                emailValido = True
+            elif(i.isalpha() == False or i.isdigit() == False):
+                if(i != "@" and i != "." and i != "-" and i != "_"):
+                    emailValido = False
+                    break
+            pass
+        
+        if(emailValido == False):
             self.condicion = self.condicion - 1
             self.errorLabelCorreo['text'] = "Correo ingresado no válido"
-
         else:
             self.condicion = self.condicion + 1
             self.errorLabelCorreo['text'] = " "
-
        
         # Verificar contraseña1
         if(self.contra.isalnum() == False or self.largoContra < 8 or "@" in self.contra or "." in self.contra or "_" in self.contra or
