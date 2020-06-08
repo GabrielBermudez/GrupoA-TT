@@ -1,4 +1,4 @@
-Integrantes: Ramiro Gonzales, Mercado Leandro, Griffouliere Gerónimo, Giménez Jose, Bermudez Gabriel
+Integrantes: Ramiro Gonzales, Mercado Leandro, Bermudez Gabriel
 
 Titulo del tema propuesto: Luxury (Sistema de Gestión Hotelera)
 
