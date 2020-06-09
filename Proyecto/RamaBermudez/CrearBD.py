@@ -133,7 +133,7 @@ def InsertarCliente(nombre,apellido,dni,telefono,email,domicilio,fechaNacimiento
     conexion.commit()
     conexion.close()
 ###########################CREAR TABLA ESTACIONAMIENTO##################################################
-def crearEstacionamiento(conexion):
+def CrearEstacionamiento(conexion):
     cursor = conexion.cursor()
 
     try:
@@ -156,17 +156,27 @@ def InsertarEspacioEstacionamiento(id_cliente,ocupado):
     cursor = conexion.cursor()
     try:
         cursor.execute("INSERT INTO estacionamientos(id_cliente,ocupado) VALUES (?,?)", (id_cliente,ocupado))
-        
     except sqlite3.OperationalError:
         print("No se pudo insertar el espacio de estacionamiento.")
     else:
-        print("Se pudo insertar el espacio de estacionamiento con exito en la base de datos.")
+        print("Se pudo insertar el espacio de estacionamiento con exito en la base de datos.")    
+    
 
     conexion.commit()
     conexion.close()
 
 
-
+def UpdateEspacioEstacionamiento(espacio,id_cliente,ocupado):
+    conexion = sqlite3.connect("empleadosDB.db")
+    cursor = conexion.cursor()
+    try:
+        cursor.execute("UPDATE estacionamientos SET id_cliente = ?, ocupado=? WHERE id = ?", (id_cliente,ocupado,espacio))
+    except sqlite3.OperationalError:
+        print("No se pudo actualizar el espacio de estacionamiento.")
+    else:
+        print("Se pudo actualizar el espacio de estacionamiento con exito en la base de datos.") 
+    conexion.commit()
+    conexion.close()
 
 ############################################################################################################
 
@@ -216,3 +226,15 @@ InsertarHabitacion(3,"5","Si",25.50,"No","No","No", "Comun")
 #InsertarCliente("Ramiro","Gonzales","38234765","2614578923","ramiro@malandra.com","Lujan de Cuyo", "1994-06-15","Argentina","Tarjeta Credito",7,"UHM365","2020-06-11 21:07:30","2020-06-18 20:15:7")
 #InsertarCliente("Gabriel","Bermudez","39237216","2614269628","gabriel@malandra.com","Niñas de Ayohuma 1395", "1995-10-06","Argentina","Efectivo",5,"ARK246","2020-06-10 21:07:30","2020-06-15 20:15:07")
 #SELECT * FROM habitaciones, clientes WHERE clientes.id == habitaciones.id_Cliente;
+
+#CrearEstacionamiento(conexion_sql())
+
+contador=0
+"""while(contador<18):
+    InsertarEspacioEstacionamiento("null",False)
+    contador+=1"""
+
+"""contador2=1
+while(contador2<19):
+    UpdateEspacioEstacionamiento(contador2,"null",0)
+    contador2+=1"""
