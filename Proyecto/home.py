@@ -9,7 +9,6 @@ from Login import Ingreso
 from Registro import Registro
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
-from tkinter import scrolledtext as st
 
 
 class Luxury:
@@ -34,15 +33,11 @@ class Luxury:
 
         #creacion de label
         #Imagen
-        self.imagen = Image.open('Luxury.png')
-        self.imagen = self.imagen.resize((110, 85), Image.ANTIALIAS) # Redimension (Alto, Ancho)
-        self.imagen = ImageTk.PhotoImage(self.imagen)
-        
-        #self.logo = tk.Label(self.ventanaHome, image= imagen)
-        #self.logo.pack()
-        
-        
-         
+        self.imagenLogo = Image.open('Luxury.png')
+        self.imagenLogo = self.imagenLogo.resize((350,350), Image.ANTIALIAS) # Redimension (Alto, Ancho)
+        self.imagenLogo = ImageTk.PhotoImage(self.imagenLogo) 
+        self.labelLogo = tk.Label(self.ventanaHome, text="", image=self.imagenLogo, bg="black")
+        self.labelLogo.place(x=70,y=50)
         #fecha
         self.fecha = date.today()
         self.fecha1=tk.Label(self.ventanaHome, text=self.fecha, font='times 20 italic')
