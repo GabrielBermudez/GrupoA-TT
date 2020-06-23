@@ -575,15 +575,292 @@ class RegistroHuesped:
             self.errorLabelSalida['text'] = " "
 
 
-
-
-
     def Volver(self, ventana2):
         self.ventana2.destroy()
 
-        
-
 #################################################  CREACION DE LA VENTANA LISTA DE HUESPEDES  ###############################################################
+    def ListaHuespedes(self, ventana):
+        self.ventana3 = tk.Toplevel(ventana)
+        self.ventana3.title("Huéspedes")
+        self.ventana3.geometry("500x450")
+        self.ventana3.resizable(0,0)
+
+        """ NECESITO ESTABLECER UN CRITERIO DE BÚSQUEDA PARA ENTRAR A LA BASE DE DATOS Y TRAER LOS DATOS DEL CLIENTE
+            TENGO PENSADO PONER UN CUADRO DE BÚSQUEDA QUE CONSULTE EL DNI A LA BASE DE DATOS Y TRAIGA TODOS LOS DATOS
+            DE ESE CLIENTE, AUNQUE CREO QUE SE PODRÍA ASIGNAR UN ID AL CLIENTE CUANDO SE LE ASIGNA LA HABITACIÓN TAMBIÉN"""
+
+        self.labelBusqueda = tk.Label(self.ventana3, text = "Búsqueda: ")
+        self.labelBusqueda.grid(column = 0, row = 0, padx = 4, pady = 6)
+        self.labelBusqueda.configure(foreground = "Black")
+        #Ingreso del criterio de búsqueda, con el que se va a hacer la consulta a la base de datos
+        self.criterioBusqueda = tk.StringVar()
+        self.inputBusqueda = tk.Entry(self.ventana3, width = 30, textvariable = self.criterioBusqueda)
+        self.inputBusqueda.grid(column = 1, row = 0)
+
+        self.labelTituloMuestra = tk.Label(self.ventana3, text = "Resultados de la búsqueda")
+        self.labelTituloMuestra.grid(column = 1, row = 3, padx = 4, pady = 6)
+        #self.labelTituloMuestra.place(x = 175, y = 50)
+        self.labelTituloMuestra.config(fg = "Black", font = ("Chilanka",16))
+
+##################################################  Nombre  ##############################################################################################
+        self.labelNombreMuestra = tk.Label(self.ventana3, text = "Nombre: ")
+        self.labelNombreMuestra.grid(column = 0, row = 4, padx = 50, pady = 6)
+        self.labelNombreMuestra.configure(foreground = "Black")
+        #Obtención de datos, acá tiene que hacer la consulta a la base de datos, traer la info y llenar los campos
+        self.nombreObtenido = tk.StringVar()
+        self.muestraNombre = tk.Entry(self.ventana3, width = 30, textvariable = self.nombreObtenido, state = "readonly")
+        self.muestraNombre.grid(column = 1, row = 4)
+
+##################################################  Apellido  ##############################################################################################
+        self.labelApellidoMuestra = tk.Label(self.ventana3, text = "Apellidos: ")
+        self.labelApellidoMuestra.grid(column = 0, row = 5, padx = 50, pady = 6)
+        self.labelApellidoMuestra.configure(foreground = "Black")
+        #
+        self.apellidoObtenido = tk.StringVar()
+        self.muestraApellido = tk.Entry(self.ventana3, width = 30, textvariable = self.apellidoObtenido, state = "readonly")
+        self.muestraApellido.grid(column = 1, row = 5)
+
+##################################################  DNI  ##############################################################################################
+        self.labelDNIMuestra = tk.Label(self.ventana3, text = "DNI: ")
+        self.labelDNIMuestra.grid(column = 0, row = 6, padx = 50, pady = 6)
+        self.labelDNIMuestra.configure(foreground = "Black")
+        #
+        self.dniObtenido = tk.StringVar()
+        self.muestraDNI = tk.Entry(self.ventana3, width = 30, textvariable = self.dniObtenido, state = "readonly")
+        self.muestraDNI.grid(column = 1, row = 6)
+
+##################################################  Telefono  ##############################################################################################
+        self.labelTelMuestra = tk.Label(self.ventana3, text = "Teléfono: ")
+        self.labelTelMuestra.grid(column = 0, row = 7, padx = 50, pady = 6)
+        self.labelTelMuestra.configure(foreground = "Black")
+        #
+        self.telObtenido = tk.StringVar()
+        self.muestraTel = tk.Entry(self.ventana3, width = 30, textvariable = self.telObtenido, state = "readonly")
+        self.muestraTel.grid(column = 1, row = 7)
+
+##################################################  Nacionalidad  ##############################################################################################
+        self.labelNacMuestra = tk.Label(self.ventana3, text = "Nacionalidad: ")
+        self.labelNacMuestra.grid(column = 0, row = 8, padx = 50, pady = 6)
+        self.labelNacMuestra.configure(foreground = "Black")
+        #
+        self.nacionalidadObtenida = tk.StringVar()
+        self.muestraNacion = tk.Entry(self.ventana3, width = 30, textvariable = self.nacionalidadObtenida, state = "readonly")
+        self.muestraNacion.grid(column = 1, row = 8)
+
+##################################################  Estadia  ##############################################################################################
+        self.labelMuestraEstadia = tk.Label(self.ventana3, text = "Estadía: ")
+        self.labelMuestraEstadia.grid(column = 0, row = 9, padx = 50, pady = 6)
+        self.labelMuestraEstadia.configure(foreground = "Black")
+        #
+        self.estadiaObtenida = tk.StringVar()
+        self.muestraEstadia = tk.Entry(self.ventana3, width = 30, textvariable = self.estadiaObtenida, state = "readonly")
+        self.muestraEstadia.grid(column = 1, row = 9)
+
+##################################################  Check-in  ##############################################################################################
+        self.labelMuestraIngreso = tk.Label(self.ventana3, text = "Check-in: ")
+        self.labelMuestraIngreso.grid(column = 0, row = 10, padx = 50, pady = 6)
+        self.labelMuestraIngreso.configure(foreground = "Black")
+        #
+        self.ingresoObtenido = tk.StringVar()
+        self.muestraIngreso = tk.Entry(self.ventana3, width = 30, textvariable = self.ingresoObtenido, state = "readonly")
+        self.muestraIngreso.grid(column = 1, row = 10)
+
+##################################################  Check-out  ##############################################################################################
+        self.labelMuestraSalida = tk.Label(self.ventana3, text = "Check-out: ")
+        self.labelMuestraSalida.grid(column = 0, row = 11, padx = 50, pady = 6)
+        self.labelMuestraSalida.configure(foreground = "Black")
+        #
+        self.salidaObtenida = tk.StringVar()
+        self.muestraSalida = tk.Entry(self.ventana3, width = 30, textvariable = self.salidaObtenida, state = "readonly")
+        self.muestraSalida.grid(column = 1, row = 11)
+
+######################################################  BOTONES VENTANA 3  ######################################################################################
+
+        self.botonValidar = tk.Button(self.ventana3, text = "Consultar", command=lambda: self.LogicaLista(), background="#5FBD94", activebackground="#6BD8A9")
+        self.botonValidar.place(x = 275, y = 390, width = 80, height = 45)
+
+        self.botonCerrar = tk.Button(self.ventana3, text = "Cerrar", command=lambda:self.CerrarLista(self.ventana3), background="#D76458", activebackground="#FF7A6C")
+        self.botonCerrar.place(x = 175, y = 390, width = 80, height = 45)
+
+        self.botonBuscar = tk.Button(self.ventana3, text = "Buscar", command=lambda:self.Busqueda(self.ventana3), background="#D8D8D8", activebackground="#EAEDEC")
+        self.botonBuscar.grid(column = 1, row = 2, padx = 4, pady = 6)
+
+###################################################  LÓGICA DE LA VENTANA LISTA HUESPEDES  ###############################################################################
+    def LogicaLista(self):
+        print("Holiiiiiii")
+        print("Esto creo que no va a hacer falta")
+        
+    
+    def Busqueda(self, ventana3):
+        print("Acá es donde se hacen las consultas a la base de datos")
+
+
+    def CerrarLista(self, ventana3):
+        self.ventana3.destroy()
+
+
+
+
+######################################################  CREACIÓN DE LA VENTANA DE CHECK OUT  ######################################################################################
+
+    def CheckOut(self, ventana):
+        self.ventana4 = tk.Toplevel(ventana)
+        self.ventana4.title("Check-Out")
+        self.ventana4.geometry("500x590")
+        self.ventana4.resizable(0,0)
+
+        self.lblBusquedaOut = tk.Label(self.ventana4, text = "Búsqueda: ")
+        self.lblBusquedaOut.grid(column = 0, row = 0, padx = 4, pady = 6)
+        self.lblBusquedaOut.configure(foreground = "Black")
+        #Ingreso del criterio de búsqueda, con el que se va a hacer la consulta a la base de datos
+        self.entradaBusqueda = tk.StringVar()
+        self.inputBusquedaEntrada = tk.Entry(self.ventana4, width = 30, textvariable = self.entradaBusqueda)
+        self.inputBusquedaEntrada.grid(column = 1, row = 0)
+
+        self.labelTituloMuestra = tk.Label(self.ventana4, text = "Resultados de la búsqueda")
+        self.labelTituloMuestra.grid(column = 1, row = 3)
+        #self.labelTituloMuestra.place(x = 175, y = 50)
+        self.labelTituloMuestra.config(fg = "Black", font = ("Chilanka",16))
+
+##################################################  Nombre  ##############################################################################################
+        self.lblNombreSalida = tk.Label(self.ventana4, text = "Nombre: ")
+        self.lblNombreSalida.grid(column = 0, row = 4, padx = 25, pady = 6)
+        self.lblNombreSalida.configure(foreground = "Black")
+        #
+        self.nombreSalida = tk.StringVar()
+        self.muestraNombreSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.nombreSalida, state = "readonly")
+        self.muestraNombreSalida.grid(column = 1, row = 4)
+
+##################################################  Apellido  ##############################################################################################
+        self.lblApellidoSalida = tk.Label(self.ventana4, text = "Apellido")
+        self.lblApellidoSalida.grid(column = 0, row = 5, padx = 25, pady = 6)
+        self.lblApellidoSalida.configure(foreground = "Black")
+        #
+        self.apellidoSalida = tk.StringVar()
+        self.muestraApellidoSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.apellidoSalida, state = "readonly")
+        self.muestraApellidoSalida.grid(column = 1, row = 5)
+
+##################################################  DNI  ##############################################################################################
+        self.lblDniSalida = tk.Label(self.ventana4, text = "DNI: ")
+        self.lblDniSalida.grid(column = 0, row = 6, padx = 25, pady = 6)
+        self.lblDniSalida.configure(foreground = "Black")
+        #
+        self.dniSalida = tk.StringVar()
+        self.muestraDNISalida = tk.Entry(self.ventana4, width = 30, textvariable = self.dniSalida, state = "readonly")
+        self.muestraDNISalida.grid(column = 1, row = 6)
+
+##################################################  Telefono  ##############################################################################################
+        self.lblTelSalida = tk.Label(self.ventana4, text = "Teléfono: ")
+        self.lblTelSalida.grid(column = 0, row = 7, padx = 25, pady = 6)
+        self.lblTelSalida.configure(foreground = "Black")
+        #
+        self.telSalida = tk.StringVar()
+        self.muestraTelSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.telSalida, state = "readonly")
+        self.muestraTelSalida.grid(column = 1, row = 7)
+
+##################################################  Email  ##############################################################################################
+        self.lblEmailSalida = tk.Label(self.ventana4, text = "Email: ")
+        self.lblEmailSalida.grid(column = 0, row = 8, padx = 25, pady = 6)
+        self.lblEmailSalida.configure(foreground = "Black")
+        #
+        self.emailSalida = tk.StringVar()
+        self.muestraEmailSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.emailSalida, state = "readonly")
+        self.muestraEmailSalida.grid(column = 1, row = 8)
+
+##################################################  Domicilio  ##############################################################################################
+        self.lblDomicilioSalida = tk.Label(self.ventana4, text = "Domicilio: ")
+        self.lblDomicilioSalida.grid(column = 0, row = 9, padx = 25, pady = 6)
+        self.lblDomicilioSalida.configure(foreground = "Black")
+        #
+        self.dirSalida = tk.StringVar()
+        self.muestraDirSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.dirSalida, state = "readonly")
+        self.muestraDirSalida.grid(column = 1, row = 9)
+
+##################################################  Fecha Nacimiento  ##############################################################################################
+        self.lblFechaNacSalida = tk.Label(self.ventana4, text = "Fecha de Nacimiento: ")
+        self.lblFechaNacSalida.grid(column = 0, row = 10, padx = 25, pady = 6)
+        self.lblFechaNacSalida.configure(foreground = "Black")
+        #
+        self.fechaNacSalida = tk.StringVar()
+        self.muestraFechaNacSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.fechaNacSalida, state = "readonly")
+        self.muestraFechaNacSalida.grid(column = 1, row = 10)
+
+##################################################  Nacionalidad  ##############################################################################################
+        self.lblNacionalidadSalida = tk.Label(self.ventana4, text = "Nacionalidad: ")
+        self.lblNacionalidadSalida.grid(column = 0, row = 11, padx = 25, pady = 6)
+        self.lblNacionalidadSalida.configure(foreground = "Black")
+        #
+        self.nacionSalida = tk.StringVar()
+        self.muestraNacionSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.nacionSalida, state = "readonly")
+        self.muestraNacionSalida.grid(column = 1, row = 11)
+
+##################################################  Forma de Pago  ##############################################################################################
+        self.lblFDPSalida = tk.Label(self.ventana4, text = "Forma de Pago: ")
+        self.lblFDPSalida.grid(column = 0, row = 12, padx = 25, pady = 6)
+        self.lblFDPSalida.configure(foreground = "Black")
+        #
+        self.formaSalida = tk.StringVar()
+        self.muestraFormaSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.formaSalida, state = "readonly")
+        self.muestraFormaSalida.grid(column = 1, row = 12)
+
+##################################################  Estadia  ##############################################################################################
+        self.lblEstadiaSalida = tk.Label(self.ventana4, text = "Estadía: ")
+        self.lblEstadiaSalida.grid(column = 0, row = 13, padx = 25, pady = 6)
+        self.lblEstadiaSalida.configure(foreground = "Black")
+        #
+        self.estSalida = tk.StringVar()
+        self.muestraEstSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.estSalida, state = "readonly")
+        self.muestraEstSalida.grid(column = 1, row = 13)
+
+##################################################  Patente  ##############################################################################################
+        self.lblPatenteSalida = tk.Label(self.ventana4, text = "Patente: ")
+        self.lblPatenteSalida.grid(column = 0, row = 14, padx = 25, pady = 6)
+        self.lblPatenteSalida.configure(foreground = "Black")
+        #
+        self.patSalida = tk.StringVar()
+        self.muestraPatSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.patSalida, state = "readonly")
+        self.muestraPatSalida.grid(column = 1, row = 14)
+
+##################################################  Chechk-in  ##############################################################################################        
+        self.lblChinSalida = tk.Label(self.ventana4, text = "Check-in: ")
+        self.lblChinSalida.grid(column = 0, row = 15, padx = 25, pady = 6)
+        self.lblChinSalida.configure(foreground = "Black")
+        #
+        self.chinSalida = tk.StringVar()
+        self.muestraChinSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.chinSalida, state = "readonly")
+        self.muestraChinSalida.grid(column = 1, row = 15)
+
+##################################################  Check-out  ##############################################################################################
+        self.lblCoutSalida = tk.Label(self.ventana4, text = "Check-out: ")
+        self.lblCoutSalida.grid(column = 0, row = 16, padx = 25, pady = 6)
+        self.lblCoutSalida.configure(foreground = "Black")
+        #
+        self.coutSalida = tk.StringVar()
+        self.muestraCoutSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.coutSalida, state = "readonly")
+        self.muestraCoutSalida.grid(column = 1, row = 16)
+
+##################################################  BOTONES VENTANA 4 CHK-OUT  ##############################################################################################
+        self.botonValidar = tk.Button(self.ventana4, text = "Confirmar", command=lambda: self.LogicaCheckout(), background="#5FBD94", activebackground="#6BD8A9")
+        self.botonValidar.place(x = 275, y = 540, width = 80, height = 45)
+
+        self.botonCerrar = tk.Button(self.ventana4, text = "Cerrar", command=lambda:self.CerrarCheckOut(self.ventana4), background="#D76458", activebackground="#FF7A6C")
+        self.botonCerrar.place(x = 175, y = 540, width = 80, height = 45)
+
+        self.botonBusqueda = tk.Button(self.ventana4, text = "Buscar", command=lambda:self.Busqueda(self.ventana4), background="#D8D8D8", activebackground="#EAEDEC")
+        self.botonBusqueda.grid(column = 1, row = 2, padx = 4, pady = 6)
+
+###################################################  LÓGICA DE LA VENTANA CHECK-OUT  ###############################################################################
+    def LogicaCheckout(self):
+        print("Esto creo que no va a hacer falta x2")
+
+    def Busqueda(self, ventana4):
+        print("Acá va la conexión para dar de baja en la base de datos x2")
+
+    def CerrarCheckOut(self, ventana4):
+        self.ventana4.destroy()
+
+registroHuesped = RegistroHuesped()
+registroHuesped.Inicio()
 
 registroHuesped = RegistroHuesped()
 registroHuesped.Inicio()
