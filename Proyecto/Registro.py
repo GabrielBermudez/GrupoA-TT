@@ -11,7 +11,7 @@ class Registro:
         self.ventanaRegistro.geometry("600x330")
         self.ventanaRegistro.resizable(0, 0)
         self.ventanaRegistro.title("Registro")
-
+        self.center(self.ventanaRegistro)
         # Ingreso de nombre
         self.nombreLabel = tk.Label(self.ventanaRegistro, text="Nombre: ")
         self.nombreLabel.grid(column=0, row=0, padx=4, pady=6)
@@ -282,3 +282,11 @@ class Registro:
 
     def Close_VentanaRegistro(self):
         self.ventanaRegistro.destroy()
+
+    def center(self,win):
+        win.update_idletasks()
+        width = win.winfo_width()
+        height = win.winfo_height()
+        x = (win.winfo_screenwidth() // 2) - (width // 2)
+        y = (win.winfo_screenheight() // 2) - (height // 2)
+        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))   

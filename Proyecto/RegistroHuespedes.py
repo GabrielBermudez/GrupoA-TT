@@ -4,16 +4,20 @@ from tkinter import *
 import bcrypt
 from datetime import date
 
-class RegistroHuesped:
 
-    def Inicio(self):
-            
+
+class RegistroHuesped:
+    
+
+    def Inicio(self,ventanaMenuPrincipal):
+        
 ################################################  creaciòn de la ventana principal  ###############################################################
-        self.ventana = tk.Tk()
+        self.ventana = tk.Toplevel(ventanaMenuPrincipal)
         self.ventana.title("Registro")
         self.ventana.geometry("800x600")
         self.ventana.resizable(0,0)
-
+        self.center(self.ventana)
+        self.ventana.transient(ventanaMenuPrincipal)
 ################################################  Creación de los botones  ###############################################################
         self.botonRegistro = tk.Button(self.ventana, text = "Registro de Huespedes", command=lambda: self.RegistroFront(self.ventana), background="#5FBD94", activebackground="#6BD8A9")
         self.botonRegistro.place(x=300, y=50, width=200, height=100)
@@ -24,14 +28,17 @@ class RegistroHuesped:
         self.botonRegistro = tk.Button(self.ventana, text = "Check-Out", background="#5FBD94", activebackground="#6BD8A9")
         self.botonRegistro.place(x=300, y=300, width=200, height=100)
 
-        self.botonRegistro = tk.Button(self.ventana, text = "Salir", command=lambda: self.Salir(self.ventana), background="#D76458", activebackground="#FF7A6C")
+        self.botonRegistro = tk.Button(self.ventana, text = "Salir", command=lambda: self.Salir(ventanaMenuPrincipal), background="#D76458", activebackground="#FF7A6C")
         self.botonRegistro.place(x=300, y=425, width=200, height=100)
 
         self.ventana.mainloop()
 
-    def Salir(self, ventana):
+    def Salir(self, ventanaMenuPrincipal):
+        #ventanaMenuPrincipal.deiconify()
         self.ventana.destroy()
-
+        
+        
+        
 #################################################  creaciòn de la ventana de registro  ###############################################################
 
     def RegistroFront(self, ventana):
@@ -39,7 +46,8 @@ class RegistroHuesped:
         self.ventana2.title("Check-In")
         self.ventana2.geometry("600x500")
         self.ventana2.resizable(0,0)
-
+        self.center(self.ventana2)
+        self.ventana2.transient(ventana)
 ##################################################  Nombre  ##############################################################################################
         self.labelNombre = tk.Label(self.ventana2, text = "Nombre: ")
         self.labelNombre.grid(column = 0, row = 0, padx = 4, pady = 6)
@@ -859,8 +867,10 @@ class RegistroHuesped:
     def CerrarCheckOut(self, ventana4):
         self.ventana4.destroy()
 
-registroHuesped = RegistroHuesped()
-registroHuesped.Inicio()
-
-registroHuesped = RegistroHuesped()
-registroHuesped.Inicio()
+    def center(self,win):
+        win.update_idletasks()
+        width = win.winfo_width()
+        height = win.winfo_height()
+        x = (win.winfo_screenwidth() // 2) - (width // 2)
+        y = (win.winfo_screenheight() // 2) - (height // 2)
+        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))   

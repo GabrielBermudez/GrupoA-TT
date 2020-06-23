@@ -23,7 +23,9 @@ class Luxury:
         self.frameTitulo=ttk.Label(self.ventanaHome, text="Luxury")
         self.frameTitulo.config(background = "black", foreground="white",font='times 38 bold italic underline')
         self.frameTitulo.pack(anchor=CENTER)
+        self.center(self.ventanaHome)
 
+        
         #creacion de los botones
         self.botonIngresar=tk.Button(self.ventanaHome, text="Ingresar", command= self.AbrirLogin, bg="black", fg="white", font='times 20 italic', relief= RAISED)
         self.botonIngresar.place(x=550, y=150, width=210, height=105)
@@ -66,7 +68,13 @@ class Luxury:
         registro=Registro(self.ventanaHome)
         
   
-    
+    def center(self,win):
+        win.update_idletasks()
+        width = win.winfo_width()
+        height = win.winfo_height()
+        x = (win.winfo_screenwidth() // 2) - (width // 2)
+        y = (win.winfo_screenheight() // 2) - (height // 2)
+        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))   
 
 luxury = Luxury()
 luxury.FrontHome()

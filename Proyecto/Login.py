@@ -4,7 +4,7 @@ from tkinter import *
 import bcrypt
 import sqlite3
 from tkinter import messagebox as mb
-
+from MenuPrincipal import Menu
 class Ingreso:
        
 
@@ -20,6 +20,7 @@ class Ingreso:
         self.frameTitulo.config(foreground="black",font=("Verdana",24))
         #self.ventanaLogin.configure(bg='black')
         self.ventanaLogin.resizable(0,0)
+        self.center(self.ventanaLogin)
         self.labelFrameLogin=ttk.LabelFrame(self.ventanaLogin, text="Login:")        
         self.labelFrameLogin.place(x=55, y=60, width=300, height=150)
 
@@ -67,13 +68,26 @@ class Ingreso:
         self.datos=self.cursor.fetchone()
 
         if(self.datos and ((self.correoInput == self.datos[0] or self.correoInput == self.datos[1]) and bcrypt.checkpw(self.contraseñaInput, self.datos[2]))):
+            menu = Menu()
+
             mb.showinfo("Bienvenido", "Bienvenido al sistema de Administracion Hotelera Luxury")
             self.ventanaLogin.destroy()
+           
             ventanaPrincipal.destroy()
+            menu.Inicio()
+            
         else:
             print("Datos Incorrectos")
     def Close_VentanaLogin(self):
         self.ventanaLogin.destroy()
 
+
+    def center(self,win):
+        win.update_idletasks()
+        width = win.winfo_width()
+        height = win.winfo_height()
+        x = (win.winfo_screenwidth() // 2) - (width // 2)
+        y = (win.winfo_screenheight() // 2) - (height // 2)
+        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))   
 #login = Ingreso()
 #login.FrontLogin(" ","")
