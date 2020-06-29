@@ -3,11 +3,12 @@ from tkinter import ttk
 from tkinter import *
 import bcrypt
 from datetime import date
-
+from GestionHabitaciones import *
 
 
 class RegistroHuesped:
     
+    valorEntry = ""
 
     def Inicio(self,ventanaMenuPrincipal):
         
@@ -31,23 +32,23 @@ class RegistroHuesped:
         self.botonRegistro = tk.Button(self.ventana, text = "Salir", command=lambda: self.Salir(ventanaMenuPrincipal), background="#D76458", activebackground="#FF7A6C")
         self.botonRegistro.place(x=300, y=425, width=200, height=100)
 
+
         self.ventana.mainloop()
 
     def Salir(self, ventanaMenuPrincipal):
         #ventanaMenuPrincipal.deiconify()
         self.ventana.destroy()
         
-        
-        
 #################################################  creaciòn de la ventana de registro  ###############################################################
 
     def RegistroFront(self, ventana):
         self.ventana2 = tk.Toplevel(ventana)
         self.ventana2.title("Check-In")
-        self.ventana2.geometry("600x500")
+        self.ventana2.geometry("600x530")
         self.ventana2.resizable(0,0)
         self.center(self.ventana2)
         self.ventana2.transient(ventana)
+
 ##################################################  Nombre  ##############################################################################################
         self.labelNombre = tk.Label(self.ventana2, text = "Nombre: ")
         self.labelNombre.grid(column = 0, row = 0, padx = 4, pady = 6)
@@ -191,13 +192,25 @@ class RegistroHuesped:
         self.inputFDeSalida = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeSalida)
         self.inputFDeSalida.grid(column = 1, row = 12)
 
+###################################################### HABITACIÓN  ##############################################################################################
+        self.labelHab = tk.Label(self.ventana2, text = "Habitación asignada")
+        self.labelHab.grid(column = 0, row = 13, padx = 4, pady = 6)
+        self.labelHab.configure(foreground = "Black")
+        #Ingreso de datos
+        self.habEntry = tk.StringVar()
+        self.inputHab = tk.Entry(self.ventana2, width = 20, textvariable = self.habEntry, state = "readonly")
+        self.inputHab.grid(column = 1, row = 13)
+        
 ######################################################  BOTONES VENTANA 2  ######################################################################################
         #Botones
         self.botonValidar = tk.Button(self.ventana2, text = "Check-In", command=lambda:self.logicaRegistro(), background="#5FBD94", activebackground="#6BD8A9")
-        self.botonValidar.place(x = 475, y = 440, width = 80, height = 45)
+        self.botonValidar.place(x = 475, y = 480, width = 80, height = 45)
 
         self.botonCerrar = tk.Button(self.ventana2, text = "Volver", command=lambda:self.Volver(self.ventana2), background="#D76458", activebackground="#FF7A6C")
-        self.botonCerrar.place(x = 370, y = 440, width = 80, height = 45)
+        self.botonCerrar.place(x = 370, y = 480, width = 80, height = 45)
+
+        self.botonVerificar = tk.Button(self.ventana2, text = "Verificar Hab.",  command=lambda:self.VerifHabitacion(), background="#C1C1C1", activebackground="#DADADA")
+        self.botonVerificar.place(x = 175, y = 460, width = 120, height = 45)
 
 ##################################################  ETIQUETAS DE LOS ERRORES  ####################################################################
 
@@ -581,6 +594,10 @@ class RegistroHuesped:
         else:
             self.condicion = self.condicion + 1
             self.errorLabelSalida['text'] = " "
+##################################################  MÉTODOS  ##########################################################################################
+    def VerifHabitacion(self):
+        gestion2 = GestionHabitaciones()
+        gestion2.FrontHome(self.ventana2, self.habEntry)
 
 
     def Volver(self, ventana2):
@@ -591,6 +608,7 @@ class RegistroHuesped:
         self.ventana3 = tk.Toplevel(ventana)
         self.ventana3.title("Huéspedes")
         self.ventana3.geometry("500x450")
+        self.center(self.ventana3)
         self.ventana3.resizable(0,0)
 
         """ NECESITO ESTABLECER UN CRITERIO DE BÚSQUEDA PARA ENTRAR A LA BASE DE DATOS Y TRAER LOS DATOS DEL CLIENTE
@@ -715,6 +733,7 @@ class RegistroHuesped:
         self.ventana4 = tk.Toplevel(ventana)
         self.ventana4.title("Check-Out")
         self.ventana4.geometry("500x590")
+        self.center(self.ventana4)
         self.ventana4.resizable(0,0)
 
         self.lblBusquedaOut = tk.Label(self.ventana4, text = "Búsqueda: ")

@@ -7,9 +7,9 @@ from PIL import Image,ImageTk
 from tkinter import scrolledtext as st
 from Image import *
 class GestionHabitaciones:
-    def FrontHome(self):
+    def FrontHome(self, ventana2, habEntry):
         #creacion de la ventana
-        self.ventanaHome = tk.Toplevel()
+        self.ventanaHome = tk.Toplevel(ventana2)
         self.ventanaHome.title("LUXURY")
         self.ventanaHome.geometry("1280x720")
         self.ventanaHome.resizable(0,0)
@@ -136,8 +136,8 @@ class GestionHabitaciones:
         
         
         #botones
-        self.botonRegistro = tk.Button(self.frameDatos, text="Registrar huesped", bg="white")
-        self.botonRegistro.place(x=300, y=225, width=200, height=20) 
+        self.botonRegistro = tk.Button(self.frameDatos, text="Registrar huesped", bg="white", command= lambda: self.ConfirmarDato(habEntry))
+        self.botonRegistro.place(x=300, y=225, width=200, height=20)
         
         self.fila=6
         self.columna=3
@@ -155,14 +155,26 @@ class GestionHabitaciones:
                 self.labelFila=tk.Label(self.ventanaHome,text=self.contadorNombre,fg="white", bg="black")
                 self.labelFila.place(y=(95*(i-1)+240), x=3+(185*(j-1)+210))
         self.ventanaHome.mainloop()
-    def MostrarDatos(self,habitacion,id):
-        print(id+1)
+        
+    def MostrarDatos(self,habitacion,id):    
+        self.valorID = id + 1
         if(str(habitacion[id]['image']) == str(self.imagenIconRojo)):
             habitacion[id]['image'] = self.imagenIconVerde
-            
         else:
             habitacion[id]['image'] = self.imagenIconRojo   
+        return self.valorID
+
+    def PasarDato(self, valorID):
+        print(valorID)
+        self.valorDefinitivo = valorID
+        self.ventanaHome.destroy()
+        return self.valorDefinitivo
     
+    def ConfirmarDato(self,habEntry):
+        self.valor=self.valorID
+        habEntry.set(self.valor)
+        self.ventanaHome.destroy()
+
     def center(self,win):
         win.update_idletasks()
         width = win.winfo_width()

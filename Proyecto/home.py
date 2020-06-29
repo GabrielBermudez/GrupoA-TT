@@ -35,7 +35,7 @@ class Luxury:
 
         #creacion de label
         #Imagen
-        self.imagenLogo = Image.open('Luxury.png')
+        self.imagenLogo = Image.open('Image/Luxury.png')
         self.imagenLogo = self.imagenLogo.resize((350,350), Image.ANTIALIAS) # Redimension (Alto, Ancho)
         self.imagenLogo = ImageTk.PhotoImage(self.imagenLogo) 
         self.labelLogo = tk.Label(self.ventanaHome, text="", image=self.imagenLogo, bg="black")
