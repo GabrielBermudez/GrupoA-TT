@@ -134,7 +134,7 @@ class GestionHabitaciones:
         self.imagenIconRojo = ImageTk.PhotoImage(self.imagenIconRojo)
                 
 #############################################################################  botones ############################################################################################
-        self.botonConfirmar = tk.Button(self.frameDatos, text="Confirmar Habitacion", bg="white", font=('times 14 bold italic'), command=lambda:self.enviarId())
+        self.botonConfirmar = tk.Button(self.frameDatos, text="Volver", bg="white", font=('times 14 bold italic'), command=lambda:self.volver())
         self.botonConfirmar.place(x=300, y=225, width=200, height=20) 
         
         self.fila=6
@@ -216,9 +216,9 @@ class GestionHabitaciones:
         self.labelDatosCheckin["text"] = self.CheckIn
         self.labelDatosCheckout["text"] = self.CheckOut
         
-    def enviarId(self):
+    def volver(self):
         self.ventanaHome.destroy()
-        return self.valorId
+        
     
     def ConsultarDisponibilidad(self):
         self.conexion= sqlite3.connect('empleadosDB.db')
