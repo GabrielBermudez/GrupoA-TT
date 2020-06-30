@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from RegistroHuespedes import RegistroHuesped
-from GestionHabitaciones import *
+from VistaHabitaciones import *
 from AdministracionEstacionamiento import *
 
 class Menu:
@@ -38,12 +38,12 @@ class Menu:
         
         
     def AbrirGestionHabitaciones(self):
-        gestion = GestionHabitaciones()
-        gestion.FrontHome()
+        self.gestion = VistaHabitaciones()
+        self.gestion.FrontHome(self.ventanaHome)
 
     def AbrirGestionEstacionamiento(self):
-        estacionamiento = Estacionamiento()
-        estacionamiento.Inicio()
+        self.estacionamiento = Estacionamiento()
+        self.estacionamiento.Inicio(self.ventanaHome)
 
     def center(self,win):
         win.update_idletasks()
@@ -52,5 +52,5 @@ class Menu:
         x = (win.winfo_screenwidth() // 2) - (width // 2)
         y = (win.winfo_screenheight() // 2) - (height // 2)
         win.geometry('{}x{}+{}+{}'.format(width, height, x, y))    
-"""menu = Menu()
-menu.Inicio()"""
+menu = Menu()
+menu.Inicio()

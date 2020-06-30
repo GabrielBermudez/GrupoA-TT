@@ -5,19 +5,21 @@ from tkinter.font import Font
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 from tkinter import scrolledtext as st
-from RegistroHuespedes import RegistroHuesped
 import sqlite3
+
+
 #import CrearBD
-class GestionHabitaciones:
-    def FrontHome(self):
+class VistaHabitaciones:
+    def FrontHome(self,ventanaMenuPrincipal):
         self.valorId = 0
 ####################################################################  creacion de la ventana  #######################################################################################
-        self.ventanaHome = tk.Tk()
+        self.ventanaHome = tk.Toplevel(ventanaMenuPrincipal)
         self.ventanaHome.title("LUXURY")
         self.ventanaHome.geometry("1280x700")
         self.ventanaHome.resizable(0,0)
         self.ventanaHome.configure(bg= 'black')
-        
+        self.center(self.ventanaHome)
+        self.ventanaHome.transient(ventanaMenuPrincipal)
 ###################################################################### Creacion de Frames #######################################################################################
         self.frameDatos=tk.Frame(self.ventanaHome,highlightbackground="red", highlightcolor="red", highlightthickness=1, bd=0, padx=20, pady=20)
         self.frameDatos.config(width=650,height=275) 
@@ -125,16 +127,16 @@ class GestionHabitaciones:
         self.piso3.place(x=455, y=75)
         
 #############################################################################  Iconos  ##########################################################################################
-        self.imagenIconVerde = Image.open('habitacionVerde.png')
+        self.imagenIconVerde = Image.open('Image/habitacionVerde.png')
         self.imagenIconVerde = self.imagenIconVerde.resize((110, 85), Image.ANTIALIAS) # Redimension (Alto, Ancho)
         self.imagenIconVerde = ImageTk.PhotoImage(self.imagenIconVerde)
 
-        self.imagenIconRojo = Image.open('habitacionRojo.png')
+        self.imagenIconRojo = Image.open('Image/habitacionRojo.png')
         self.imagenIconRojo = self.imagenIconRojo.resize((110, 85), Image.ANTIALIAS) # Redimension (Alto, Ancho)
         self.imagenIconRojo = ImageTk.PhotoImage(self.imagenIconRojo)
                 
 #############################################################################  botones ############################################################################################
-        self.botonConfirmar = tk.Button(self.frameDatos, text="Volver", bg="white", font=('times 14 bold italic'), command=lambda:self.volver())
+        self.botonConfirmar = tk.Button(self.frameDatos, text="Volver", bg="red", font=('times 14 bold italic'), command=lambda:self.volver())
         self.botonConfirmar.place(x=300, y=225, width=200, height=20) 
         
         self.fila=6
@@ -174,13 +176,13 @@ class GestionHabitaciones:
         self.valorId=(id)
         #Creacion de variables
         print(self.valorId)
-        self.capacidad=self.datos[3]
-        self.disponibilidad = self.datos[4]
-        self.precio = self.datos[5]
-        self.wifi = self.datos[6]
-        self.AC = self.datos[7]
-        self.smart = self.datos[8]
-        self.tipoHab = self.datos[9]
+        self.capacidad=self.datos[2]
+        self.disponibilidad = self.datos[3]
+        self.precio = self.datos[4]
+        self.wifi = self.datos[5]
+        self.AC = self.datos[6]
+        self.smart = self.datos[7]
+        self.tipoHab = self.datos[8]
         #Asignacion
         self.labelDatoCapacidad["text"] = self.capacidad
         self.labelDatoSmart["text"] = self.smart
@@ -200,13 +202,13 @@ class GestionHabitaciones:
         print(self.datos)
         #Creacion de variables
         print(self.valorId)
-        self.nombre=self.datos[1]
-        self.apellido = self.datos[2]
-        self.DNI = self.datos[3]
-        self.telefono = self.datos[4]
-        self.estadia = self.datos[10]
-        self.CheckIn = self.datos[12]
-        self.CheckOut = self.datos[13]
+        self.nombre=self.datos[2]
+        self.apellido = self.datos[3]
+        self.DNI = self.datos[4]
+        self.telefono = self.datos[5]
+        self.estadia = self.datos[11]
+        self.CheckIn = self.datos[13]
+        self.CheckOut = self.datos[14]
         #Asignacion
         self.labelDatoNombre["text"] = self.nombre
         self.labelDatoApellido["text"] = self.apellido
@@ -234,24 +236,25 @@ class GestionHabitaciones:
         
         self.conexion= sqlite3.connect('empleadosDB.db')
         self.cursor=self.conexion.cursor()
-        #Query 1
-        
-        self.cursor.execute("SELECT dni_Cliente FROM habitaciones WHERE id=?",(self.valorId,))
-        self.datos =self.cursor.fetchone()
-        self.dni = self.datos[0]
-        
-        #Query 2
-        
-        self.cursor.execute("SELECT disponibilidad FROM habitaciones WHERE id=?",(self.valorId,))
-        self.datosDisponibilidad=self.cursor.fetchone()
-        self.disp = self.datosDisponibilidad[0] 
-        print(self.disp)       
-        if(str(self.disp) == "0"):
-            print("Ejecutando Datos Habitacion")
-            self.datosHabitacion(self.valorId)
-        else:
-            self.DatosCliente(self.dni)   
 
+        
+        print(self.valorId)
+        if(str(habitacion[id]['image']) == str(self.imagenIconVerde)):
+             #Query 2
+            self.cursor.execute("SELECT disponibilidad FROM habitaciones WHERE id=?",(self.valorId,))
+            self.datosDisponibilidad=self.cursor.fetchone()
+            self.disp = self.datosDisponibilidad[0] 
+            self.datosHabitacion(self.valorId)
+                  
+            
+        else:
+            #Query 1
+               
+            self.cursor.execute("SELECT dni FROM clientes, habitaciones WHERE habitaciones.id == clientes.id_habitacion AND habitaciones.id=?",(self.valorId,))
+            self.datos =self.cursor.fetchone()
+            self.dni = self.datos[0]
+            self.DatosCliente(self.dni) 
+           
     def LimpiarDatos(self):
         self.labelDatoNombre["text"] = ""
         self.labelDatoApellido["text"] = ""
@@ -267,6 +270,18 @@ class GestionHabitaciones:
         self.labelDatoAC["text"] = ""
         self.labelDatoPrecio["text"] = ""
         self.labelDatoCalidad["text"] = ""
-                
-GestionHabitaciones = GestionHabitaciones()
-GestionHabitaciones.FrontHome()
+
+    def center(self,win):
+        win.update_idletasks()
+        width = win.winfo_width()
+        frm_width = win.winfo_rootx() - win.winfo_x()
+        win_width = width + 2 * frm_width
+        height = win.winfo_height()
+        titlebar_height = win.winfo_rooty() - win.winfo_y()
+        win_height = height + titlebar_height + frm_width
+        x = win.winfo_screenwidth() // 2 - win_width // 2
+        y = win.winfo_screenheight() // 2 - win_height // 2
+        win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+        win.deiconify()    
+
+    
