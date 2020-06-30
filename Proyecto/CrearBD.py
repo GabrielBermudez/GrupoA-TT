@@ -179,8 +179,7 @@ def UpdateEspacioEstacionamiento(espacio,id_cliente,ocupado):
     conexion.close()
 
 ############################################################################################################
-def Hola():
-    print("Hola")
+
 #crear_bd(conexion_sql())
 #InsertarUsuario("Leandro", "Mercado", "38236745","2616145345", "LeandroMercado", "leandro@gmail.com", "123123")
 #InsertarUsuario("Gabriel", "Bermudez", "39237216","2616145079", "GabrielBermudez", "gabriel@gmail.com","12345")
@@ -271,3 +270,4 @@ InsertarHabitacion(3,"6","0",49.99,"Si","Si","Si", "Premium")
 InsertarCliente(1,"Ramiro","Gonzales","38234765","2614578923","ramiro@gmail.com","Lujan de Cuyo", "1994-06-15","Argentina","Tarjeta Credito",7,"UHM365","2020-06-11 21:07:30","2020-06-18 20:15:7")
 InsertarCliente(2,"Gabriel","Bermudez","39237216","2614269628","gabriel@gmail.com","Niñas de Ayohuma 1395", "1995-10-06","Argentina","Efectivo",5,"ARK246","2020-06-10 21:07:30","2020-06-15 20:15:07")
 InsertarCliente(3,"Leandro","Mercado","39842421","2616767667","leandro@gmail.com","Rodeo de la Cruz", "1996-08-17","Argentina","Efectivo",5,"ADB493","2020-06-10 21:07:30","2020-06-15 20:15:07")"""
+

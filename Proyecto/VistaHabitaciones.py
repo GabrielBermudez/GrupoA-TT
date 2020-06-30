@@ -227,7 +227,7 @@ class VistaHabitaciones:
         self.cursor=self.conexion.cursor()
         self.cursor.execute("SELECT disponibilidad FROM habitaciones",)
         self.datosDisponibilidad=self.cursor.fetchall()
-        
+        print(self.datosDisponibilidad)
     def MostrarDatos(self,habitacion,id):
         self.LimpiarDatos()
         self.habitacion = habitacion

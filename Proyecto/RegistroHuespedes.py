@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import *
 import bcrypt
 from datetime import date
+from datetime import timedelta
 from GestionHabitaciones import *
 import sqlite3
 
@@ -18,14 +19,15 @@ class RegistroHuesped:
         self.ventana.resizable(0,0)
         self.center(self.ventana)
         self.ventana.transient(ventanaMenuPrincipal)
+
 ################################################  Creación de los botones  ###############################################################
         self.botonRegistro = tk.Button(self.ventana, text = "Registro de Huespedes", command=lambda: self.RegistroFront(self.ventana), background="#5FBD94", activebackground="#6BD8A9")
         self.botonRegistro.place(x=300, y=50, width=200, height=100)
 
-        self.botonRegistro = tk.Button(self.ventana, text = "Lista de Huespedes", background="#5FBD94", activebackground="#6BD8A9")
+        self.botonRegistro = tk.Button(self.ventana, text = "Lista de Huespedes", background="#5FBD94", activebackground="#6BD8A9", command=lambda: self.ListaHuespedes(self.ventana))
         self.botonRegistro.place(x=300, y=175, width=200, height=100)
 
-        self.botonRegistro = tk.Button(self.ventana, text = "Check-Out", background="#5FBD94", activebackground="#6BD8A9")
+        self.botonRegistro = tk.Button(self.ventana, text = "Check-Out", background="#5FBD94", activebackground="#6BD8A9", command=lambda: self.CheckOut(self.ventana))
         self.botonRegistro.place(x=300, y=300, width=200, height=100)
 
         self.botonRegistro = tk.Button(self.ventana, text = "Salir", command=lambda: self.Salir(ventanaMenuPrincipal), background="#D76458", activebackground="#FF7A6C")
@@ -58,7 +60,7 @@ class RegistroHuesped:
         self.inputNombre.grid(column = 1, row = 0)
 
 ##################################################  Apellido  #######################################################################################
-        self.labelApellido = tk.Label(self.ventana2, text = "Apelldio: ")
+        self.labelApellido = tk.Label(self.ventana2, text = "Apellido: ")
         self.labelApellido.grid(column = 0, row = 1, padx = 4, pady = 6)
         self.labelApellido.configure(foreground = "Black")
         #Ingreso de datos(Apellido)
@@ -161,6 +163,7 @@ class RegistroHuesped:
         self.labelEstadia.configure(foreground = "Black")
         #Ingreso de datos (Estadía)
         self.estadiaIngresada = tk.StringVar()
+        self.estadiaIngresada.set(0)
         self.inputEstadia = tk.Entry(self.ventana2, width = 20, textvariable = self.estadiaIngresada)
         self.inputEstadia.grid(column = 1, row = 9)
 
@@ -181,14 +184,16 @@ class RegistroHuesped:
         self.fechaDeIngreso = tk.StringVar()
         self.inputFIngreso = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeIngreso)
         self.inputFIngreso.grid(column = 1, row = 11)
-
+        self.ahora = date.today()
+        self.fechaDeIngreso.set(self.ahora)
+        
 ######################################################  Check-Out  ##############################################################################################
         self.labelChkOut = tk.Label(self.ventana2, text = "Check-Out")
         self.labelChkOut.grid(column = 0, row = 12, padx = 4, pady = 6)
         self.labelChkOut.configure(foreground = "Black")
         #Ingreso de datos (Check-Out)
         self.fechaDeSalida = tk.StringVar()
-        self.inputFDeSalida = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeSalida)
+        self.inputFDeSalida = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeSalida, state = "readonly")
         self.inputFDeSalida.grid(column = 1, row = 12)
 
 ###################################################### HABITACIÓN  ##############################################################################################
@@ -282,7 +287,7 @@ class RegistroHuesped:
     def logicaRegistro(self):
         #Variables para realizar las validaciones
         self.condicion = 0    
-        self.habitacion = self.habEntry.get()
+        self.habitacion = int(self.habEntry.get())
         self.nombre = self.nombreIngresado.get()
         self.apellido = self.apellidoIngresado.get()
         self.dni = self.dniIngresado.get()
@@ -391,6 +396,10 @@ class RegistroHuesped:
                     self.dia = self.fecha[0:2]
                     self.mes = self.fecha[3:5]
                     self.anio = self.fecha[6:10]
+
+        print(self.dia)
+        print(self.mes)
+        print(self.anio)
         
         self.enteroDia = int(self.dia)
         self.enteroMes = int(self.mes)
@@ -402,17 +411,17 @@ class RegistroHuesped:
 
         if(self.enteroAnio < (self.anioActual - 100) or self.enteroAnio > self.anioActual):
             fechaValida = False
-        elif(self.enteroMes < 0 or self.enteroMes > 12):
+        elif(self.enteroMes < 1 or self.enteroMes > 12):
             fechaValida = False
-        elif(self.enteroDia <= 0 or self.enteroDia > 31):
+        elif(self.enteroDia < 1 or self.enteroDia > 31):
             fechaValida = False
 
         if(self.enteroMes == 1 and self.enteroMes == 3 and self.enteroMes == 5 and self.enteroMes == 7 and self.enteroMes == 8
             and self.enteroMes == 10 and self.enteroMes == 12 or (self.enteroDia > 31)):
-            #print("El mes ingresado no contiene esa cantidad de días 31+")
+            print("El mes ingresado no contiene esa cantidad de días 31+")
             fechaValida = False
-        elif(self.enteroMes == 4 or self.enteroMes == 6 or self.enteroMes == 9 or self.enteroMes == 11 and (self.enteroDia > 30)):
-            #print("El mes ingresado no contiene esa cantidad de días 30+")
+        elif((self.enteroMes == 4 or self.enteroMes == 6 or self.enteroMes == 9 or self.enteroMes == 11) and (self.enteroDia > 30)):
+            print("El mes ingresado no contiene esa cantidad de días 30+")
             fechaValida = False
         #si el mes ingresado es febrero
         elif(self.enteroMes == 2):
@@ -420,18 +429,18 @@ class RegistroHuesped:
             if((self.enteroAnio % 4 == 0) or ((self.enteroAnio % 100 != 0) and (self.enteroAnio % 400 == 0))):
                 #si es bisiesto febrero no puede tener más de 29 días
                 if(self.enteroDia > 29):
-                    #print("Febrero tiene 29 dìas bisiesto")
+                    print("Febrero tiene 29 dìas bisiesto")
                     fechaValida = False
             #Si el año no es bisiesto
             else:
                 #febrero no puede tener más de 28 dias
                 if(self.enteroDia > 28):
-                    #print("Febrero tiene 28 dìas No bisiesto")
+                    print("Febrero tiene 28 dìas No bisiesto")
                     fechaValida = False
 
         if(fechaValida == False):
             self.condicion = self.condicion - 1
-            self.errorLabelFechaNac['text'] = "Fecha ingresado no válida"
+            self.errorLabelFechaNac['text'] = "Fecha ingresada no válida"
         else:
             self.condicion = self.condicion + 1
             self.errorLabelFechaNac['text'] = " "
@@ -488,118 +497,42 @@ class RegistroHuesped:
             self.errorLabelPatente['text'] = " "
 
 ########################################################  Verificar Fecha Ingreso  ##########################################################################
-        self.diaIngreso = 0
-        self.mesIngreso = 0
-        self.anioIngreso = 0
-        fechaIngresoValida = True
-        for i in self.ingreso:
-            if(i.isdigit() == False):
-                if(i != "/" and i.isalpha() == True):
-                    fechaIngresoValida = False
-                    break
-                else:
-                    self.diaIngreso = self.ingreso[0:2]
-                    self.mesIngreso = self.ingreso[3:5]
-                    self.anioIngreso = self.ingreso[6:10]
         
-        self.numeroDia = int(self.diaIngreso)
-        self.numeroMes = int(self.mesIngreso)
-        self.numeroAnio = int(self.anioIngreso)
-
-        if(self.numeroAnio < (self.anioActual - 100) or self.numeroAnio > self.anioActual):
-            fechaIngresoValida = False
-        elif(self.numeroMes < 0 or self.numeroMes > 12):
-            fechaIngresoValida = False
-        elif(self.numeroDia <= 0 or self.numeroDia > 31):
-            fechaIngresoValida = False
-        
-        if(self.numeroMes == 1 and self.numeroMes == 3 and self.numeroMes == 5 and self.numeroMes == 7 and self.numeroMes == 8
-            and self.numeroMes == 10 and self.numeroMes == 12 or (self.numeroDia > 31)):
-            fechaIngresoValida = False
-        elif(self.numeroMes == 4 and self.numeroMes == 6 and self.numeroMes == 9 and self.numeroMes == 11 or (self.numeroDia > 30)):
-            fechaIngresoValida = False
-        elif(self.numeroMes == 2):
-            if((self.numeroAnio % 4 == 0) or ((self.numeroAnio % 100 != 0) and (self.numeroAnio % 400 == 0))):
-                if(self.numeroDia > 29):
-                    fechaIngresoValida = False
-            else:
-                if(self.numeroDia > 28):
-                    fechaIngresoValida = False
-        
-        if(fechaIngresoValida == False):
-            self.condicion = self.condicion - 1
-            self.errorLabelIngreso['text'] = "Fecha de ingreso no válida"
-        else:
-            self.condicion = self.condicion + 1
-            self.errorLabelIngreso['text'] = " "
+        self.condicion = self.condicion + 1
 
 ########################################################  Verificar Fecha Salida  ##########################################################################
 
-        self.diaSalida = 0
-        self.mesSalida = 0
-        self.anioSalida = 0
-        fechaSalidaValida = True
-        print(self.salida)
+        
+        self.condicion = self.condicion + 1
+        #print("Condicion final: ")
+        #print(self.condicion)
 
-        for i in self.salida:
-            if(i.isdigit() == False):
-                if(i != "/" and i.isalpha() == True):
-                    fechaSalidaValida = False
+
+########################################################  Verificar Disponibilidad  ##########################################################################       
+        if(self.habitacion>0 and self.habitacion<19):
+            for i in str(self.habitacion):
+                if(i.isalpha()):
+                    self.habitacionValida = False
                     break
-                else:
-                    self.diaSalida = self.salida[0:2]
-                    self.mesSalida = self.salida[3:5]
-                    self.anioSalida = self.salida[6:10]
+
+                elif(i.isdigit()):
+                    self.habitacionValida = True               
             pass
-        
-        self.numDiaSalida = int(self.diaSalida)
-        self.numMesSalida = int(self.mesSalida)
-        self.numAnioSalida = int(self.anioSalida)
-        
-        if(self.numAnioSalida < (self.anioActual - 100) or self.numAnioSalida > self.anioActual):
-            fechaSalidaValida = False
-        elif(self.numMesSalida < 0 or self.numMesSalida > 12):
-            fechaSalidaValida = False
-        elif(self.numDiaSalida <= 0 or self.numDiaSalida > 31):
-            fechaSalidaValida = False
-        
-        if(self.numMesSalida == 1 and self.numMesSalida == 3 and self.numMesSalida == 5 and self.numMesSalida == 7 and self.numMesSalida == 8
-            and self.numMesSalida == 10 and self.numMesSalida == 12 or (self.numDiaSalida > 31)):
-            fechaSalidaValida = False
-        elif(self.numMesSalida == 4 and self.numMesSalida == 6 and self.numMesSalida == 9 and self.numMesSalida == 11 or (self.numDiaSalida > 30)):
-            #Mostrar error de los operadores or y and al gabi
-            fechaSalidaValida = False
-        elif(self.numMesSalida == 2):
-            if((self.numAnioSalida % 4 == 0) or ((self.numAnioSalida % 100 != 0) and (self.numAnioSalida % 400 == 0))):
-                if(self.numDiaSalida > 29):
-                    fechaSalidaValida = False
-            else:
-                if(self.numDiaSalida > 28):
-                    fechaSalidaValida = False
-        #Si el numero del mes de ingreso es mayor al numero del mes de salida no es válido
-        if(self.numeroMes > self.numMesSalida):
-            fechaSalidaValida = False
-        #Si el año de salida es diferente al año de entrada no es válido (excepto entre diciembre y enero(CONSULTAR DUDA))
-        if(self.numAnioSalida != self.numeroAnio):
-            fechaSalidaValida = False
-        #Si el mes es el mismo pero el dìa de ingreso es mayor al de salida tampoco es válido
-        if(self.numeroMes == self.numMesSalida):
-            if(self.numeroDia > self.numDiaSalida):
-                fechaSalidaValida = False
-
-        if(fechaSalidaValida == False):
-            self.condicion = self.condicion - 1
-            self.errorLabelSalida['text'] = "Fecha de salida no válida"
-        else:
+            
+        if(self.habitacionValida):
             self.condicion = self.condicion + 1
-            self.errorLabelSalida['text'] = " "
-
+            self.IngresoCliente()
         
-    
-        self.IngresoCliente()
+        else:
+            self.condicion = self.condicion - 1
+            
 ##################################################  MÉTODOS  ##########################################################################################
     
     def VerifHabitacion(self):
+        self.dias = timedelta(days = int(self.estadiaIngresada.get()))
+        self.calcularSalida = self.ahora + self.dias
+        self.salida = self.calcularSalida
+        self.fechaDeSalida.set(self.calcularSalida)
         gestion2 = GestionHabitaciones()
         gestion2.FrontHome(self.ventana2, self.habEntry)
 
@@ -609,12 +542,24 @@ class RegistroHuesped:
 
     def IngresoCliente(self):
         print(self.condicion)
-        if(self.condicion==13):
+        if(self.condicion==14):
             self.conexion = sqlite3.connect("empleadosDB.db")
             self.cursor = self.conexion.cursor()
+
+            self.cursor.execute("PRAGMA foreign_keys = 0")
+            self.conexion.commit()
+
             self.cursor.execute("INSERT INTO clientes(id_habitacion,nombre,apellido,dni,telefono,email,domicilio,fechaNacimiento,nacionalidad,formaDePago,estadia,patente,checkIn,checkOut) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (self.habitacion, self.nombre, self.apellido, self.dni, self.tel, self.email, self.direccion, self.fecha, self.nacionIngresada,self.fdpIngresada, self.estadia, self.patente, self.ingreso,self.salida))
             self.conexion.commit()
+
+            self.cursor.execute("UPDATE habitaciones SET disponibilidad=1 WHERE id=?",(self.habitacion,))
+            self.conexion.commit()
+
+            self.cursor.execute("PRAGMA foreign_keys = 1")
+            self.conexion.commit()
+
             self.conexion.close()
+            self.ventana2.destroy()
 
 
 #################################################  CREACION DE LA VENTANA LISTA DE HUESPEDES  ###############################################################
@@ -629,7 +574,7 @@ class RegistroHuesped:
             TENGO PENSADO PONER UN CUADRO DE BÚSQUEDA QUE CONSULTE EL DNI A LA BASE DE DATOS Y TRAIGA TODOS LOS DATOS
             DE ESE CLIENTE, AUNQUE CREO QUE SE PODRÍA ASIGNAR UN ID AL CLIENTE CUANDO SE LE ASIGNA LA HABITACIÓN TAMBIÉN"""
 
-        self.labelBusqueda = tk.Label(self.ventana3, text = "Búsqueda: ")
+        self.labelBusqueda = tk.Label(self.ventana3, text = "DNI: ")
         self.labelBusqueda.grid(column = 0, row = 0, padx = 4, pady = 6)
         self.labelBusqueda.configure(foreground = "Black")
         #Ingreso del criterio de búsqueda, con el que se va a hacer la consulta a la base de datos
@@ -722,7 +667,7 @@ class RegistroHuesped:
         self.botonCerrar = tk.Button(self.ventana3, text = "Cerrar", command=lambda:self.CerrarLista(self.ventana3), background="#D76458", activebackground="#FF7A6C")
         self.botonCerrar.place(x = 175, y = 390, width = 80, height = 45)
 
-        self.botonBuscar = tk.Button(self.ventana3, text = "Buscar", command=lambda:self.Busqueda(self.ventana3), background="#D8D8D8", activebackground="#EAEDEC")
+        self.botonBuscar = tk.Button(self.ventana3, text = "Buscar", command=lambda:self.BusquedaCliente(), background="#D8D8D8", activebackground="#EAEDEC")
         self.botonBuscar.grid(column = 1, row = 2, padx = 4, pady = 6)
 
 ###################################################  LÓGICA DE LA VENTANA LISTA HUESPEDES  ###############################################################################
@@ -731,13 +676,31 @@ class RegistroHuesped:
         print("Esto creo que no va a hacer falta")
         
     
-    def Busqueda(self, ventana3):
-        print("Acá es donde se hacen las consultas a la base de datos")
+    def BusquedaCliente(self):
+        self.dni=self.criterioBusqueda.get()
 
+        self.conexion = sqlite3.connect("empleadosDB.db")
+        self.cursor = self.conexion.cursor()
+        self.cursor.execute("SELECT * FROM clientes WHERE dni=?",(self.dni,))
+        self.datosCliente=self.cursor.fetchone()
+        self.conexion.commit()
+        self.conexion.close()
+        print(self.datosCliente)
+
+        self.nombreObtenido.set(self.datosCliente[2])
+        self.apellidoObtenido.set(self.datosCliente[3])
+        self.dniObtenido.set(self.datosCliente[4])
+        self.telObtenido.set(self.datosCliente[5])
+        self.nacionalidadObtenida.set(self.datosCliente[9])
+        self.estadiaObtenida.set(self.datosCliente[11])
+        self.ingresoObtenido.set(self.datosCliente[13])
+        self.salidaObtenida.set(self.datosCliente[14])
+        
 
     def CerrarLista(self, ventana3):
         self.ventana3.destroy()
 
+    
 
 
 
@@ -881,21 +844,66 @@ class RegistroHuesped:
         self.muestraCoutSalida.grid(column = 1, row = 16)
 
 ##################################################  BOTONES VENTANA 4 CHK-OUT  ##############################################################################################
-        self.botonValidar = tk.Button(self.ventana4, text = "Confirmar", command=lambda: self.LogicaCheckout(), background="#5FBD94", activebackground="#6BD8A9")
+        self.botonValidar = tk.Button(self.ventana4, text = "Confirmar", command=lambda: self.EliminarCliente(), background="#5FBD94", activebackground="#6BD8A9")
         self.botonValidar.place(x = 275, y = 540, width = 80, height = 45)
 
         self.botonCerrar = tk.Button(self.ventana4, text = "Cerrar", command=lambda:self.CerrarCheckOut(self.ventana4), background="#D76458", activebackground="#FF7A6C")
         self.botonCerrar.place(x = 175, y = 540, width = 80, height = 45)
 
-        self.botonBusqueda = tk.Button(self.ventana4, text = "Buscar", command=lambda:self.Busqueda(self.ventana4), background="#D8D8D8", activebackground="#EAEDEC")
+        self.botonBusqueda = tk.Button(self.ventana4, text = "Buscar", command=lambda:self.Busqueda(), background="#D8D8D8", activebackground="#EAEDEC")
         self.botonBusqueda.grid(column = 1, row = 2, padx = 4, pady = 6)
 
 ###################################################  LÓGICA DE LA VENTANA CHECK-OUT  ###############################################################################
-    def LogicaCheckout(self):
-        print("Esto creo que no va a hacer falta x2")
+    def EliminarCliente(self):
+        self.dni=self.entradaBusqueda.get()
 
-    def Busqueda(self, ventana4):
-        print("Acá va la conexión para dar de baja en la base de datos x2")
+        self.conexion = sqlite3.connect("empleadosDB.db")
+        self.cursor = self.conexion.cursor()
+
+        self.cursor.execute("PRAGMA foreign_keys = 0")
+        self.conexion.commit()
+
+        self.cursor.execute("DELETE FROM clientes WHERE dni=?",(self.dni,))
+        self.conexion.commit()
+
+        self.cursor.execute("UPDATE habitaciones SET disponibilidad=0 WHERE id=?",(self.datosCliente[1],))
+        self.conexion.commit()
+        
+        self.cursor.execute("UPDATE estacionamientos SET id_Cliente=null, ocupado=0 WHERE id_cliente=?",(self.datosCliente[0],))
+        self.conexion.commit()
+        
+        self.cursor.execute("PRAGMA foreign_keys = 1")
+        self.conexion.commit()
+
+        self.conexion.close()
+        self.ventana4.destroy()
+
+
+    def Busqueda(self):
+        self.dni=self.entradaBusqueda.get()
+
+        self.conexion = sqlite3.connect("empleadosDB.db")
+        self.cursor = self.conexion.cursor()
+        self.cursor.execute("SELECT * FROM clientes WHERE dni=?",(self.dni,))
+        self.datosCliente=self.cursor.fetchone()
+        self.conexion.commit()
+        self.conexion.close()
+        print(self.datosCliente)
+
+        self.nombreSalida.set(self.datosCliente[2])
+        self.apellidoSalida.set(self.datosCliente[3])
+        self.dniSalida.set(self.datosCliente[4])
+        self.telSalida.set(self.datosCliente[5])
+        self.emailSalida.set(self.datosCliente[6])
+        self.dirSalida.set(self.datosCliente[7])
+        self.fechaNacSalida.set(self.datosCliente[8])
+        self.nacionSalida.set(self.datosCliente[9])
+        self.formaSalida.set(self.datosCliente[10])
+        self.estSalida.set(self.datosCliente[11])
+        self.patSalida.set(self.datosCliente[12])
+        self.chinSalida.set(self.datosCliente[13])
+        self.coutSalida.set(self.datosCliente[14])
+        
 
     def CerrarCheckOut(self, ventana4):
         self.ventana4.destroy()

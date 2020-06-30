@@ -17,14 +17,20 @@ class Menu:
         self.frameTitulo.pack(anchor=CENTER)
         self.center(self.ventanaHome)
         #creacion de los botones
-        self.botonIngresar=tk.Button(self.ventanaHome, text="Registro Huespedes", bg="black", fg="white", font='times 20 italic', relief= RAISED, command=self.AbrirRegistroHuesped)
-        self.botonIngresar.place(x=230, y=150, width=350, height=105)
+        self.botonRegistroHuespedes=tk.Button(self.ventanaHome, text="Registro Huespedes", bg="black", fg="white", font='times 20 italic', relief= RAISED, command=self.AbrirRegistroHuesped)
+        self.botonRegistroHuespedes.place(x=230, y=100, width=350, height=80)
         
-        self.botonRegistrarse=tk.Button(self.ventanaHome, text="Disponibilidad Habitaciones", bg="black", fg="white", font='times 20 italic', relief= RAISED, command=self.AbrirGestionHabitaciones)
-        self.botonRegistrarse.place(x=230, y=300, width=350, height=105)
+        self.botonDisponibilidad=tk.Button(self.ventanaHome, text="Disponibilidad Habitaciones", bg="black", fg="white", font='times 20 italic', relief= RAISED, command=self.AbrirGestionHabitaciones)
+        self.botonDisponibilidad.place(x=230, y=200, width=350, height=80)
 
-        self.botonRegistrarse=tk.Button(self.ventanaHome, text="Estacionamiento", bg="black", fg="white", font='times 20 italic', relief= RAISED, command=self.AbrirGestionEstacionamiento)
-        self.botonRegistrarse.place(x=230, y=450, width=350, height=105)
+        self.botonEstacionamiento=tk.Button(self.ventanaHome, text="Estacionamiento", bg="black", fg="white", font='times 20 italic', relief= RAISED, command=self.AbrirGestionEstacionamiento)
+        self.botonEstacionamiento.place(x=230, y=300, width=350, height=80)
+
+        self.botonConfig=tk.Button(self.ventanaHome, text="Configuraciones", bg="black", fg="white", font='times 20 italic', relief= RAISED)
+        self.botonConfig.place(x=230, y=400, width=350, height=80)
+
+        self.botonSalir=tk.Button(self.ventanaHome, text="Salir", bg="black", fg="red", font='times 20 italic', relief= RAISED, command=self.ventanaHome.destroy)
+        self.botonSalir.place(x=230, y=500, width=350, height=80)
 
         self.ventanaHome.mainloop()
 
