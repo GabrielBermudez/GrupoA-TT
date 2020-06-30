@@ -3,15 +3,17 @@ from tkinter import ttk
 from tkinter import *
 import bcrypt
 from datetime import date
+from datetime import timedelta
 from GestionHabitaciones import *
 
 
 class RegistroHuesped:
     
     valorEntry = ""
+    
 
     def Inicio(self,ventanaMenuPrincipal):
-        
+        self.dias = " "
 ################################################  creaciòn de la ventana principal  ###############################################################
         self.ventana = tk.Toplevel(ventanaMenuPrincipal)
         self.ventana.title("Registro")
@@ -19,6 +21,7 @@ class RegistroHuesped:
         self.ventana.resizable(0,0)
         self.center(self.ventana)
         self.ventana.transient(ventanaMenuPrincipal)
+        
 ################################################  Creación de los botones  ###############################################################
         self.botonRegistro = tk.Button(self.ventana, text = "Registro de Huespedes", command=lambda: self.RegistroFront(self.ventana), background="#5FBD94", activebackground="#6BD8A9")
         self.botonRegistro.place(x=300, y=50, width=200, height=100)
@@ -59,7 +62,7 @@ class RegistroHuesped:
         self.inputNombre.grid(column = 1, row = 0)
 
 ##################################################  Apellido  #######################################################################################
-        self.labelApellido = tk.Label(self.ventana2, text = "Apelldio: ")
+        self.labelApellido = tk.Label(self.ventana2, text = "Apellido: ")
         self.labelApellido.grid(column = 0, row = 1, padx = 4, pady = 6)
         self.labelApellido.configure(foreground = "Black")
         #Ingreso de datos(Apellido)
@@ -180,8 +183,10 @@ class RegistroHuesped:
         self.labelChkIn.configure(foreground = "Black")
         #Ingreso de datos (Check-in)
         self.fechaDeIngreso = tk.StringVar()
-        self.inputFIngreso = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeIngreso)
+        self.inputFIngreso = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeIngreso, state = "readonly")
         self.inputFIngreso.grid(column = 1, row = 11)
+        self.ahora = date.today()
+        self.fechaDeIngreso.set(self.ahora)
 
 ######################################################  Check-Out  ##############################################################################################
         self.labelChkOut = tk.Label(self.ventana2, text = "Check-Out")
@@ -189,7 +194,7 @@ class RegistroHuesped:
         self.labelChkOut.configure(foreground = "Black")
         #Ingreso de datos (Check-Out)
         self.fechaDeSalida = tk.StringVar()
-        self.inputFDeSalida = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeSalida)
+        self.inputFDeSalida = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeSalida, state = "readonly")
         self.inputFDeSalida.grid(column = 1, row = 12)
 
 ###################################################### HABITACIÓN  ##############################################################################################
@@ -209,7 +214,7 @@ class RegistroHuesped:
         self.botonCerrar = tk.Button(self.ventana2, text = "Volver", command=lambda:self.Volver(self.ventana2), background="#D76458", activebackground="#FF7A6C")
         self.botonCerrar.place(x = 370, y = 480, width = 80, height = 45)
 
-        self.botonVerificar = tk.Button(self.ventana2, text = "Verificar Hab.",  command=lambda:self.VerifHabitacion(), background="#C1C1C1", activebackground="#DADADA")
+        self.botonVerificar = tk.Button(self.ventana2, text = "Verificar Hab.",  command=lambda:self.VerifHabitacion(self.dias), background="#C1C1C1", activebackground="#DADADA")
         self.botonVerificar.place(x = 175, y = 460, width = 120, height = 45)
 
 ##################################################  ETIQUETAS DE LOS ERRORES  ####################################################################
@@ -296,9 +301,10 @@ class RegistroHuesped:
         self.fdpIngresada = self.inputFDP.get()
         self.estadia = self.estadiaIngresada.get()
         self.patente = self.patenteIngresada.get()
-        self.ingreso = self.fechaDeIngreso.get()
-        self.salida = self.fechaDeSalida.get()
+        self.ingreso = self.fechaDeIngreso
+        self.salida = self.fechaDeSalida
         #['text']=
+        print(self.condicion)
 
 ####################################################   verificar nombre  ##########################################################################
         if(self.nombre.isalpha() == False):
@@ -306,6 +312,8 @@ class RegistroHuesped:
             self.errorLabelNombre['text'] = "Nombre ingresado no válido"
         else:
             self.condicion = self.condicion + 1
+            """print("Condicion Nombre: ")
+            print(self.condicion)"""
             self.errorLabelNombre['text'] = " "
 
 ####################################################  Verificar Apellido  ##########################################################################
@@ -314,6 +322,8 @@ class RegistroHuesped:
             self.errorLabelApellido['text'] = "Apellido ingresado no válido"
         else:
             self.condicion = self.condicion + 1
+            """print("Condicion Apellido: ")
+            print(self.condicion)"""
             self.errorLabelApellido['text'] = " "
 
 ####################################################  Verificar DNI  ##########################################################################
@@ -322,6 +332,8 @@ class RegistroHuesped:
             self.errorLabelDNI['text'] = "DNI ingresado no válido"
         else:
             self.condicion = self.condicion + 1
+            """print("Condicion DNI: ")
+            print(self.condicion)"""
             self.errorLabelDNI['text'] = " "
 
 ####################################################  Verificar teléfono  ##########################################################################
@@ -385,7 +397,7 @@ class RegistroHuesped:
         fechaValida = True
         for i in self.fecha:
             if(i.isdigit() == False):
-                if(i != "/"):
+                if(i != "-"):
                     fechaValida = False
                     break
                 else:                    
@@ -470,6 +482,10 @@ class RegistroHuesped:
         else:
             self.condicion = self.condicion + 1
             self.errorLabelEstadia['text'] = " "
+            self.dias = timedelta(days = int(estadia))
+            
+
+
 
 #######################################################  Verificar Patente  ##########################################################################
         patenteValida = False
@@ -489,115 +505,27 @@ class RegistroHuesped:
             self.errorLabelPatente['text'] = " "
 
 ########################################################  Verificar Fecha Ingreso  ##########################################################################
-        self.diaIngreso = 0
-        self.mesIngreso = 0
-        self.anioIngreso = 0
-        fechaIngresoValida = True
-        for i in self.ingreso:
-            if(i.isdigit() == False):
-                if(i != "/" and i.isalpha() == True):
-                    fechaIngresoValida = False
-                    break
-                else:
-                    self.diaIngreso = self.ingreso[0:2]
-                    self.mesIngreso = self.ingreso[3:5]
-                    self.anioIngreso = self.ingreso[6:10]
-
-        self.numeroDia = int(self.diaIngreso)
-        self.numeroMes = int(self.mesIngreso)
-        self.numeroAnio = int(self.anioIngreso)
-
-        if(self.numeroAnio < (self.anioActual - 100) or self.numeroAnio > self.anioActual):
-            fechaIngresoValida = False
-        elif(self.numeroMes < 0 or self.numeroMes > 12):
-            fechaIngresoValida = False
-        elif(self.numeroDia <= 0 or self.numeroDia > 31):
-            fechaIngresoValida = False
         
-        if(self.numeroMes == 1 and self.numeroMes == 3 and self.numeroMes == 5 and self.numeroMes == 7 and self.numeroMes == 8
-            and self.numeroMes == 10 and self.numeroMes == 12 or (self.numeroDia > 31)):
-            fechaIngresoValida = False
-        elif(self.numeroMes == 4 and self.numeroMes == 6 and self.numeroMes == 9 and self.numeroMes == 11 or (self.numeroDia > 30)):
-            fechaIngresoValida = False
-        elif(self.numeroMes == 2):
-            if((self.numeroAnio % 4 == 0) or ((self.numeroAnio % 100 != 0) and (self.numeroAnio % 400 == 0))):
-                if(self.numeroDia > 29):
-                    fechaIngresoValida = False
-            else:
-                if(self.numeroDia > 28):
-                    fechaIngresoValida = False
-        
-        if(fechaIngresoValida == False):
-            self.condicion = self.condicion - 1
-            self.errorLabelIngreso['text'] = "Fecha de ingreso no válida"
-        else:
-            self.condicion = self.condicion + 1
-            self.errorLabelIngreso['text'] = " "
+        self.condicion = self.condicion + 1
 
 ########################################################  Verificar Fecha Salida  ##########################################################################
 
-        self.diaSalida = 0
-        self.mesSalida = 0
-        self.anioSalida = 0
-        fechaSalidaValida = True
-        print(self.salida)
+        
+        self.condicion = self.condicion + 1
+        print("Condicion final: ")
+        print(self.condicion)
 
-        for i in self.salida:
-            if(i.isdigit() == False):
-                if(i != "/" and i.isalpha() == True):
-                    fechaSalidaValida = False
-                    break
-                else:
-                    self.diaSalida = self.salida[0:2]
-                    self.mesSalida = self.salida[3:5]
-                    self.anioSalida = self.salida[6:10]
-            pass
-        
-        self.numDiaSalida = int(self.diaSalida)
-        self.numMesSalida = int(self.mesSalida)
-        self.numAnioSalida = int(self.anioSalida)
-        
-        if(self.numAnioSalida < (self.anioActual - 100) or self.numAnioSalida > self.anioActual):
-            fechaSalidaValida = False
-        elif(self.numMesSalida < 0 or self.numMesSalida > 12):
-            fechaSalidaValida = False
-        elif(self.numDiaSalida <= 0 or self.numDiaSalida > 31):
-            fechaSalidaValida = False
-        
-        if(self.numMesSalida == 1 and self.numMesSalida == 3 and self.numMesSalida == 5 and self.numMesSalida == 7 and self.numMesSalida == 8
-            and self.numMesSalida == 10 and self.numMesSalida == 12 or (self.numDiaSalida > 31)):
-            fechaSalidaValida = False
-        elif(self.numMesSalida == 4 and self.numMesSalida == 6 and self.numMesSalida == 9 and self.numMesSalida == 11 or (self.numDiaSalida > 30)):
-            #Mostrar error de los operadores or y and al gabi
-            fechaSalidaValida = False
-        elif(self.numMesSalida == 2):
-            if((self.numAnioSalida % 4 == 0) or ((self.numAnioSalida % 100 != 0) and (self.numAnioSalida % 400 == 0))):
-                if(self.numDiaSalida > 29):
-                    fechaSalidaValida = False
-            else:
-                if(self.numDiaSalida > 28):
-                    fechaSalidaValida = False
-        #Si el numero del mes de ingreso es mayor al numero del mes de salida no es válido
-        if(self.numeroMes > self.numMesSalida):
-            fechaSalidaValida = False
-        #Si el año de salida es diferente al año de entrada no es válido (excepto entre diciembre y enero(CONSULTAR DUDA))
-        if(self.numAnioSalida != self.numeroAnio):
-            fechaSalidaValida = False
-        #Si el mes es el mismo pero el dìa de ingreso es mayor al de salida tampoco es válido
-        if(self.numeroMes == self.numMesSalida):
-            if(self.numeroDia > self.numDiaSalida):
-                fechaSalidaValida = False
-
-        if(fechaSalidaValida == False):
-            self.condicion = self.condicion - 1
-            self.errorLabelSalida['text'] = "Fecha de salida no válida"
-        else:
-            self.condicion = self.condicion + 1
-            self.errorLabelSalida['text'] = " "
-##################################################  MÉTODOS  ##########################################################################################
-    def VerifHabitacion(self):
+##################################################  MÉTODOS  ##########################################################################################    
+    def VerifHabitacion(self, dias):
+        print("Días: ")
+        print(dias)
+        self.calcularSalida = self.ahora + dias
+        self.salida = self.calcularSalida
+        self.fechaDeSalida.set(self.calcularSalida)
         gestion2 = GestionHabitaciones()
         gestion2.FrontHome(self.ventana2, self.habEntry)
+        
+       
 
 
     def Volver(self, ventana2):
