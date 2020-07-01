@@ -35,7 +35,7 @@ class VistaHabitaciones:
 
 
         self.labelTitulo=tk.Label(self.frameDatos,text="INFORMACION DE LA HABITACION",background="#181818", foreground="white", font=('times 16 bold italic underline'))
-        self.labelTitulo.place(x=120, y=-20)   
+        self.labelTitulo.place(x=135, y=-20)   
 
         self.labelCapacidad=tk.Label(self.frameDatos,text="Capacidad: ",background="#181818", foreground="white",font=('times 14 bold italic'))
         self.labelCapacidad.place(x=0, y=20)
@@ -68,8 +68,8 @@ class VistaHabitaciones:
         self.labelDatoPrecio.place(x=140, y=225, width=100, height=20)         
         
 #########################################################################  Frame 2  ####################################################################################################
-        self.labelTitulo=tk.Label(self.frameDatos1,text="INFORMACION DEL CLIENTE",background="#181818", foreground="white", font=('times 16 bold italic underline'))
-        self.labelTitulo.place(x=160, y=-20)
+        self.labelTitulo2=tk.Label(self.frameDatos1,text="INFORMACION DEL CLIENTE",background="#181818", foreground="white", font=('times 16 bold italic underline'))
+        self.labelTitulo2.place(x=160, y=-20)
         
         self.labelNombre=tk.Label(self.frameDatos1,text="Nombre: ",background="#181818", foreground="white",font=('times 14 bold italic'))
         self.labelNombre.place(x=0, y=20)
@@ -169,7 +169,7 @@ class VistaHabitaciones:
         
         self.valorId=(id)
         #Creacion de variables
-        print(self.valorId)
+        self.labelTitulo["text"]="INFORMACION DE LA HABITACION "+str(self.valorId)
         self.capacidad=self.datos[2]
         self.disponibilidad = self.datos[3]
         self.precio = self.datos[4]
@@ -248,6 +248,7 @@ class VistaHabitaciones:
             self.datos =self.cursor.fetchone()
             self.dni = self.datos[0]
             self.DatosCliente(self.dni) 
+            self.labelTitulo["text"]="INFORMACION DE LA HABITACION"
            
     def LimpiarDatos(self):
         self.labelDatoNombre["text"] = ""

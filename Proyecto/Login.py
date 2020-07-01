@@ -17,12 +17,16 @@ class Ingreso:
         self.frameTitulo=ttk.Label(self.ventanaLogin, text="Luxury")
         #self.frameTitulo.place(x=150, y=15, width=250, height=40)
         self.frameTitulo.pack(anchor=CENTER)
-        self.frameTitulo.config(foreground="black",font=("Verdana",24))
+        self.frameTitulo.config(foreground="black",font=("times",24))
         #self.ventanaLogin.configure(bg='black')
         self.ventanaLogin.resizable(0,0)
         self.center(self.ventanaLogin)
         self.labelFrameLogin=ttk.LabelFrame(self.ventanaLogin, text="Login:")        
         self.labelFrameLogin.place(x=55, y=60, width=300, height=150)
+        
+
+        self.labelLogin = tk.Label(self.ventanaLogin, text = "")
+        self.labelLogin.place(x=90, y=200, width=200, height=105)
 
          #Label Usuario
         self.labelUsuario = ttk.Label(self.labelFrameLogin, text="Usuario o Email: ")
@@ -77,7 +81,8 @@ class Ingreso:
             menu.Inicio()
             
         else:
-            print("Datos Incorrectos")
+           self.labelLogin["text"]="Los datos ingresados son incorrectos"
+           self.labelLogin.configure(fg="red")
     def Close_VentanaLogin(self):
         self.ventanaLogin.destroy()
 

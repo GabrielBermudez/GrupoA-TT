@@ -32,7 +32,7 @@ class Luxury:
         
         self.botonRegistrarse=tk.Button(self.ventanaHome, text="Registrarse", command= self.AbrirRegistro, bg="black", fg="white", font='times 20 italic', relief= RAISED)
         self.botonRegistrarse.place(x=550, y=300, width=210, height=105)
-
+        
         #creacion de label
         #Imagen
         self.imagenLogo = Image.open('Image/Luxury.png')

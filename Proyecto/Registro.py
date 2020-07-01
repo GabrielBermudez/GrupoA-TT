@@ -233,7 +233,7 @@ class Registro:
            "'" in self.contra or ";" in self.contra or "<" in self.contra or ">" in self.contra or "'" in self.contra or
            "+" in self.contra or "¡" in self.contra or ":" in self.contra):
             self.condicion = self.condicion - 1
-            self.errorLabelContra['text'] = "Caracteres especiales no válidos"
+            self.errorLabelContra['text'] = "Caracteres especiales no válidos (Debe tener 8 digitos)"
 
         else:
             self.condicion = self.condicion + 1

@@ -14,21 +14,21 @@ class Estacionamiento:
         self.ventanaHome.title("LUXURY")
         self.ventanaHome.geometry("1300x800")
         self.ventanaHome.resizable(0,0)
-        self.ventanaHome.configure(bg="black")
+        self.ventanaHome.configure(bg="#181818")
         self.center(self.ventanaHome)
         self.frameBotones=tk.Frame(self.ventanaHome,highlightbackground="red", highlightcolor="red", highlightthickness=1, bd=0, padx=20, pady=20)
         self.frameBotones.place(x=45,y=55)
-        self.frameBotones.configure(bg="black")
+        self.frameBotones.configure(bg="#181818")
 
         self.frameDatos=tk.Frame(self.ventanaHome,highlightbackground="red", highlightcolor="red", highlightthickness=1, bd=0, padx=20, pady=20)
         self.frameDatos.config(width=550,height=655) 
         self.frameDatos.place(x=685,y=55)
-        self.frameDatos.configure(bg="black")
+        self.frameDatos.configure(bg="#181818")
 
-        self.LabelTituloFrameBotones=tk.Label(self.ventanaHome,text="Estacionamiento", font=("Verdana",20),fg="red", bg="black",borderwidth=2, relief="groove")
+        self.LabelTituloFrameBotones=tk.Label(self.ventanaHome,text="Estacionamiento", font=("Verdana",20),fg="red", bg="#181818",borderwidth=2, relief="groove")
         self.LabelTituloFrameBotones.place(x=170,y=10)
 
-        self.LabelTituloFrameDatos=tk.Label(self.ventanaHome,text="Administracion del Estacionamiento", font=("Verdana",20),fg="red", bg="black",borderwidth=2, relief="groove")
+        self.LabelTituloFrameDatos=tk.Label(self.ventanaHome,text="Administracion del Estacionamiento", font=("times",20),fg="red", bg="#181818",borderwidth=2, relief="groove")
         self.LabelTituloFrameDatos.place(x=720,y=10)
 
         self.imagenIconVerde = Image.open('Image/AutoVerdeIcon.png')
@@ -43,10 +43,10 @@ class Estacionamiento:
         self.CrearBotones()
         
 ##########################################BUSCAR CLIENTE###################################################
-        self.labelBuscarCliente=tk.Label(self.frameDatos,text="Buscar Cliente", fg="red", bg="black",font=("Verdana",18))
+        self.labelBuscarCliente=tk.Label(self.frameDatos,text="Buscar Cliente", fg="red", bg="#181818",font=("times",18))
         self.labelBuscarCliente.place(x=140, y=-15)
 
-        self.labelDni=tk.Label(self.frameDatos,text="DNI: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelDni=tk.Label(self.frameDatos,text="DNI: ", fg="red",bg="#181818",font=("times",14))
         self.labelDni.place(x=0, y=45)
 
         self.datoDni=tk.StringVar()
@@ -56,55 +56,55 @@ class Estacionamiento:
         self.datosCliente=st.ScrolledText(self.frameDatos, width=55, height=8.5, state="disabled")
         self.datosCliente.place(x=20,y=95) 
         
-        self.datoAparcamiento=tk.Label(self.frameDatos,text="", fg="black",bg="grey",font=("Verdana",14))
+        self.datoAparcamiento=tk.Label(self.frameDatos,text="", fg="black",bg="grey",font=("times",14))
         self.datoAparcamiento.place(x=70, y=270, width=40, height=30)   
        
 
-        self.botonBuscar=tk.Button(self.frameDatos,text="Buscar", bg="green", font=("Verdana",15), command=self.BuscarCliente)
+        self.botonBuscar=tk.Button(self.frameDatos,text="Buscar", bg="green", font=("times",15), command=self.BuscarCliente)
         self.botonBuscar.place(x=300,y=40, width=90,height=35)
 
-        self.botonAsignar=tk.Button(self.frameDatos,text="Asignar", bg="green", font=("Verdana",18), command=self.AsignarEspacio)
+        self.botonAsignar=tk.Button(self.frameDatos,text="Asignar", bg="green", font=("times",18), command=self.AsignarEspacio)
         self.botonAsignar.place(x=130,y=270, width=100,height=35)
 
-        self.botonLimpiar=tk.Button(self.frameDatos,text="Limpiar", bg="red", font=("Verdana",18), command=self.LimpiarDatosCliente)
+        self.botonLimpiar=tk.Button(self.frameDatos,text="Limpiar", bg="red", font=("times",18), command=self.LimpiarDatosCliente)
         self.botonLimpiar.place(x=260,y=270, width=100,height=35)
 
-        self.botonLimpiar=tk.Button(self.frameDatos,text="Volver", bg="red", font=("Verdana",18), command=self.CerrarVentana)
+        self.botonLimpiar=tk.Button(self.frameDatos,text="Volver", bg="red", font=("times",18), command=self.CerrarVentana)
         self.botonLimpiar.place(x=400,y=595, width=100,height=35)
 
 
 ###########################################DATOS CLIENTE####################################################
-        self.labelNombre=tk.Label(self.frameDatos,text="Nombre: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelNombre=tk.Label(self.frameDatos,text="Nombre: ", fg="red",bg="#181818",font=("times",14))
         self.labelNombre.place(x=0, y=320)
         self.labelDatoNombre=tk.Label(self.frameDatos, text="", bg="white")
         self.labelDatoNombre.place(x=150, y=320, width=300, height=30)      
 
-        self.labelApellido=tk.Label(self.frameDatos,text="Apellido: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelApellido=tk.Label(self.frameDatos,text="Apellido: ", fg="red",bg="#181818",font=("times",14))
         self.labelApellido.place(x=0, y=360)
         self.labelDatoApellido=tk.Label(self.frameDatos, text="" ,bg="white")
         self.labelDatoApellido.place(x=150, y=360, width=300, height=30)  
 
-        self.labelDni2=tk.Label(self.frameDatos,text="DNI: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelDni2=tk.Label(self.frameDatos,text="DNI: ", fg="red",bg="#181818",font=("times",14))
         self.labelDni2.place(x=0, y=400)
         self.labelDatoDni2=tk.Label(self.frameDatos, textvariable="", bg="white")
         self.labelDatoDni2.place(x=150, y=400, width=300, height=30)
 
-        self.labelPatente=tk.Label(self.frameDatos,text="Patente: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelPatente=tk.Label(self.frameDatos,text="Patente: ", fg="red",bg="#181818",font=("times",14))
         self.labelPatente.place(x=0, y=440)
         self.labelDatoPatente=tk.Label(self.frameDatos, textvariable="", bg="white")
         self.labelDatoPatente.place(x=150, y=440, width=300, height=30)  
 
-        self.labelTelefono=tk.Label(self.frameDatos,text="Telefono: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelTelefono=tk.Label(self.frameDatos,text="Telefono: ", fg="red",bg="#181818",font=("times",14))
         self.labelTelefono.place(x=0, y=480)
         self.labelDatoTelefono=tk.Label(self.frameDatos,textvariable="",bg="white")
         self.labelDatoTelefono.place(x=150, y=480, width=300, height=30)
 
-        self.labelNacionalidad=tk.Label(self.frameDatos,text="Nacionalidad: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelNacionalidad=tk.Label(self.frameDatos,text="Nacionalidad: ", fg="red",bg="#181818",font=("times",14))
         self.labelNacionalidad.place(x=0, y=520)
         self.labelDatoNacionalidad=tk.Label(self.frameDatos, textvariable="")
         self.labelDatoNacionalidad.place(x=150, y=520, width=300, height=30)
 
-        self.labelCheckOut=tk.Label(self.frameDatos,text="CheckOut: ", fg="red",bg="black",font=("Verdana",14))
+        self.labelCheckOut=tk.Label(self.frameDatos,text="CheckOut: ", fg="red",bg="#181818",font=("times",14))
         self.labelCheckOut.place(x=0, y=560)
         self.labelDatoCheckOut=tk.Label(self.frameDatos, textvariable="", bg="white")
         self.labelDatoCheckOut.place(x=150, y=560, width=300, height=30)

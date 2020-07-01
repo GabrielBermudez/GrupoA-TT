@@ -4,7 +4,7 @@ from tkinter import *
 from RegistroHuespedes import RegistroHuesped
 from VistaHabitaciones import *
 from AdministracionEstacionamiento import *
-
+from GestionEmpleados import *
 class Menu:
     def Inicio(self):
         self.ventanaHome = tk.Tk()
@@ -26,7 +26,7 @@ class Menu:
         self.botonEstacionamiento=tk.Button(self.ventanaHome, text="Estacionamiento", bg="black", fg="white", font='times 20 italic', relief= RAISED, command=self.AbrirGestionEstacionamiento)
         self.botonEstacionamiento.place(x=230, y=300, width=350, height=80)
 
-        self.botonConfig=tk.Button(self.ventanaHome, text="Configuraciones", bg="black", fg="white", font='times 20 bold italic', relief= RAISED)
+        self.botonConfig=tk.Button(self.ventanaHome, text="Configuraciones", bg="black", fg="white", font='times 20 bold italic', relief= RAISED, command=self.AbrirGestionEmpleados)
         self.botonConfig.place(x=230, y=400, width=350, height=80)
 
         self.botonSalir=tk.Button(self.ventanaHome, text="Salir", bg="#9E2105", fg="white", font='times 20 italic', relief= RAISED, command=self.ventanaHome.destroy)
@@ -35,10 +35,7 @@ class Menu:
         self.ventanaHome.mainloop()
 
     def AbrirRegistroHuesped(self):
-       
-        self.registroHuesped = RegistroHuesped()
-
-        
+        self.registroHuesped = RegistroHuesped() 
         self.registroHuesped.Inicio(self.ventanaHome)
         
         
@@ -51,6 +48,10 @@ class Menu:
         self.estacionamiento = Estacionamiento()
         self.estacionamiento.Inicio(self.ventanaHome)
 
+    def AbrirGestionEmpleados(self):
+        self.config = GestionEmpleados()
+        self.config.Inicio(self.ventanaHome)
+
     def center(self,win):
         win.update_idletasks()
         width = win.winfo_width()
@@ -58,5 +59,3 @@ class Menu:
         x = (win.winfo_screenwidth() // 2) - (width // 2)
         y = (win.winfo_screenheight() // 2) - (height // 2)
         win.geometry('{}x{}+{}+{}'.format(width, height, x, y))    
-menu = Menu()
-menu.Inicio()
