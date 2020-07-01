@@ -16,6 +16,7 @@ class RegistroHuesped:
         self.ventana = tk.Toplevel(ventanaMenuPrincipal)
         self.ventana.title("Registro")
         self.ventana.geometry("800x600")
+        self.ventana.configure(background = "#181818")
         self.ventana.resizable(0,0)
         self.center(self.ventana)
         self.ventana.transient(ventanaMenuPrincipal)
@@ -45,7 +46,8 @@ class RegistroHuesped:
     def RegistroFront(self, ventana):
         self.ventana2 = tk.Toplevel(ventana)
         self.ventana2.title("Check-In")
-        self.ventana2.geometry("600x530")
+        self.ventana2.geometry("600x550")
+        self.ventana2.configure(background = "#181818")
         self.ventana2.resizable(0,0)
         self.center(self.ventana2)
         self.ventana2.transient(ventana)
@@ -53,7 +55,7 @@ class RegistroHuesped:
 ##################################################  Nombre  ##############################################################################################
         self.labelNombre = tk.Label(self.ventana2, text = "Nombre: ")
         self.labelNombre.grid(column = 0, row = 0, padx = 4, pady = 6)
-        self.labelNombre.configure(foreground = "Black")
+        self.labelNombre.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (Nombre)
         self.nombreIngresado = tk.StringVar()
         self.inputNombre = tk.Entry(self.ventana2, width = 20, textvariable = self.nombreIngresado)
@@ -62,7 +64,7 @@ class RegistroHuesped:
 ##################################################  Apellido  #######################################################################################
         self.labelApellido = tk.Label(self.ventana2, text = "Apellido: ")
         self.labelApellido.grid(column = 0, row = 1, padx = 4, pady = 6)
-        self.labelApellido.configure(foreground = "Black")
+        self.labelApellido.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos(Apellido)
         self.apellidoIngresado = tk.StringVar()
         self.inputApellido = tk.Entry(self.ventana2, width = 20, textvariable = self.apellidoIngresado)
@@ -71,7 +73,7 @@ class RegistroHuesped:
 ###################################################  DNI  ##############################################################################################
         self.labelDni = tk.Label(self.ventana2, text = "DNI: ")
         self.labelDni.grid(column = 0, row = 2, padx = 4, pady = 6)
-        self.labelDni.configure(foreground = "Black")
+        self.labelDni.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (DNI)
         self.dniIngresado = tk.StringVar()
         self.inputDNI = tk.Entry(self.ventana2, width = 20, textvariable = self.dniIngresado)
@@ -80,7 +82,7 @@ class RegistroHuesped:
 ################################################### Telefono  ##############################################################################################
         self.labelTel = tk.Label(self.ventana2, text = "Tel/Cel: ")
         self.labelTel.grid(column = 0, row = 3, padx = 4, pady = 6)
-        self.labelTel.configure(foreground = "Black")
+        self.labelTel.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos(Telefono)
         self.telIngresado = tk.StringVar()
         self.inputTel = tk.Entry(self.ventana2, width = 20, textvariable = self.telIngresado)
@@ -89,7 +91,7 @@ class RegistroHuesped:
 #####################################################  Email  #####################################################################################
         self.labelCorreo = tk.Label(self.ventana2, text = "Email: ")
         self.labelCorreo.grid(column = 0, row = 4, padx = 4, pady = 6)
-        self.labelCorreo.configure(foreground = "Black")
+        self.labelCorreo.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (Email)
         self.correoIngresado = tk.StringVar()
         self.inputCorreo = tk.Entry(self.ventana2, width = 20, textvariable = self.correoIngresado)
@@ -98,7 +100,7 @@ class RegistroHuesped:
 #####################################################  Domicilio  #####################################################################################
         self.labelDir = tk.Label(self.ventana2, text = "Dirección: ")
         self.labelDir.grid(column = 0, row = 5, padx = 4, pady = 6)
-        self.labelDir.configure(foreground = "Black")
+        self.labelDir.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (dirección)
         self.dirIngresada = tk.StringVar()
         self.inputDir = tk.Entry(self.ventana2, width = 20, textvariable = self.dirIngresada)
@@ -107,7 +109,7 @@ class RegistroHuesped:
 ######################################################  Fecha de Nacimiento  ########################################################################
         self.labelFecha = tk.Label(self.ventana2, text = "Fecha de Nacimiento: ")
         self.labelFecha.grid(column = 0, row = 6, padx = 4, pady = 6)
-        self.labelFecha.configure(foreground = "Black")
+        self.labelFecha.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (fecha de nacimiento)
         self.fechaIngresada = tk.StringVar()
         self.inputFecha = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaIngresada)
@@ -118,7 +120,7 @@ class RegistroHuesped:
 ######################################################  Nacionalidad  ###############################################################################
         self.labelNacion = tk.Label(self.ventana2, text = "Nacionalidad: ")
         self.labelNacion.grid(column = 0, row = 7, padx = 4, pady = 6)
-        self.labelNacion.configure(foreground = "Black")
+        self.labelNacion.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (Nacionalidad)
         self.inputNacion = ttk.Combobox(self.ventana2, width = 19, text = "Nacionalidad", state="readonly")
         self.inputNacion["values"] = ["Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina",
@@ -147,7 +149,7 @@ class RegistroHuesped:
 #######################################################  Forma de Pago  ########################################################################################
         self.labelPago = tk.Label(self.ventana2, text = "Forma de Pago: ")
         self.labelPago.grid(column = 0, row = 8, padx = 4, pady = 6)
-        self.labelPago.configure(foreground = "Black")
+        self.labelPago.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
 
         #Ingreso de datos (Forma de pago)
         self.inputFDP = ttk.Combobox(self.ventana2, width = 19, text  = "Forma De Pago", state = "readonly")
@@ -158,9 +160,9 @@ class RegistroHuesped:
         self.inputFDP.set("Forma de Pago")
            
 #######################################################  Estadía  ##############################################################################################
-        self.labelEstadia = tk.Label(self.ventana2, text = "Estadía: ")
+        self.labelEstadia = tk.Label(self.ventana2, text = "Estadía (cantidad noches): ")
         self.labelEstadia.grid(column = 0, row = 9, padx = 4, pady = 6)
-        self.labelEstadia.configure(foreground = "Black")
+        self.labelEstadia.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (Estadía)
         self.estadiaIngresada = tk.StringVar()
         self.estadiaIngresada.set(0)
@@ -170,7 +172,7 @@ class RegistroHuesped:
 #####################################################  Patente  ##############################################################################################
         self.labelPatente = tk.Label(self.ventana2, text = "Patente: ")
         self.labelPatente.grid(column = 0, row = 10, padx = 4, pady = 6)
-        self.labelPatente.configure(foreground = "Black")
+        self.labelPatente.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (Patente)
         self.patenteIngresada = tk.StringVar()
         self.inputPatente = tk.Entry(self.ventana2, width = 20, textvariable = self.patenteIngresada)
@@ -179,10 +181,10 @@ class RegistroHuesped:
 ######################################################  Check-In  ##############################################################################################
         self.labelChkIn = tk.Label(self.ventana2, text = "Check-In")
         self.labelChkIn.grid(column = 0, row = 11, padx = 4, pady = 6)
-        self.labelChkIn.configure(foreground = "Black")
+        self.labelChkIn.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (Check-in)
         self.fechaDeIngreso = tk.StringVar()
-        self.inputFIngreso = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeIngreso)
+        self.inputFIngreso = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeIngreso, state = "readonly")
         self.inputFIngreso.grid(column = 1, row = 11)
         self.ahora = date.today()
         self.fechaDeIngreso.set(self.ahora)
@@ -190,7 +192,7 @@ class RegistroHuesped:
 ######################################################  Check-Out  ##############################################################################################
         self.labelChkOut = tk.Label(self.ventana2, text = "Check-Out")
         self.labelChkOut.grid(column = 0, row = 12, padx = 4, pady = 6)
-        self.labelChkOut.configure(foreground = "Black")
+        self.labelChkOut.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos (Check-Out)
         self.fechaDeSalida = tk.StringVar()
         self.inputFDeSalida = tk.Entry(self.ventana2, width = 20, textvariable = self.fechaDeSalida, state = "readonly")
@@ -199,89 +201,95 @@ class RegistroHuesped:
 ###################################################### HABITACIÓN  ##############################################################################################
         self.labelHab = tk.Label(self.ventana2, text = "Habitación asignada")
         self.labelHab.grid(column = 0, row = 13, padx = 4, pady = 6)
-        self.labelHab.configure(foreground = "Black")
+        self.labelHab.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso de datos
         self.habEntry = tk.StringVar()
+        self.habEntry.set(0)
         self.inputHab = tk.Entry(self.ventana2, width = 20, textvariable = self.habEntry, state = "readonly")
         self.inputHab.grid(column = 1, row = 13)
         
 ######################################################  BOTONES VENTANA 2  ######################################################################################
         #Botones
         self.botonValidar = tk.Button(self.ventana2, text = "Check-In", command=lambda:self.logicaRegistro(), background="#5FBD94", activebackground="#6BD8A9")
-        self.botonValidar.place(x = 475, y = 480, width = 80, height = 45)
+        self.botonValidar.place(x = 475, y = 495, width = 80, height = 45)
 
         self.botonCerrar = tk.Button(self.ventana2, text = "Volver", command=lambda:self.Volver(self.ventana2), background="#D76458", activebackground="#FF7A6C")
-        self.botonCerrar.place(x = 370, y = 480, width = 80, height = 45)
+        self.botonCerrar.place(x = 370, y = 495, width = 80, height = 45)
 
         self.botonVerificar = tk.Button(self.ventana2, text = "Verificar Hab.",  command=lambda:self.VerifHabitacion(), background="#C1C1C1", activebackground="#DADADA")
-        self.botonVerificar.place(x = 175, y = 460, width = 120, height = 45)
+        self.botonVerificar.place(x = 198, y = 475, width = 120, height = 45)
 
 ##################################################  ETIQUETAS DE LOS ERRORES  ####################################################################
 
         #ERROR EN EL NOMBRE
         self.errorLabelNombre = tk.Label(self.ventana2, text=" ")
         self.errorLabelNombre.grid(column=2, row=0)
-        self.errorLabelNombre.configure(foreground="red")
+        self.errorLabelNombre.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN EL APELLIDO
         self.errorLabelApellido = tk.Label(self.ventana2, text = " ")
         self.errorLabelApellido.grid(column = 2, row = 1)
-        self.errorLabelApellido.configure(foreground = "red")
+        self.errorLabelApellido.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN EL DNI
         self.errorLabelDNI = tk.Label(self.ventana2, text = " ")
         self.errorLabelDNI.grid(column = 2, row = 2)
-        self.errorLabelDNI.configure(foreground = "red")
+        self.errorLabelDNI.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN EL TELÉFONO
         self.errorLabelTel = tk.Label(self.ventana2, text = " ")
         self.errorLabelTel.grid(column = 2, row = 3)
-        self.errorLabelTel.configure(foreground = "red")
+        self.errorLabelTel.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN EL EMAIL
         self.errorLabelEmail = tk.Label(self.ventana2, text = " ")
         self.errorLabelEmail.grid(column = 2, row = 4)
-        self.errorLabelEmail.configure(foreground = "red")
+        self.errorLabelEmail.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN EL DOMICILIO
         self.errorLabelDomicilio = tk.Label(self.ventana2, text = " ")
         self.errorLabelDomicilio.grid(column = 2, row = 5)
-        self.errorLabelDomicilio.configure(foreground = "red")
+        self.errorLabelDomicilio.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN LA FECHA DE NACIMIENTO
         self.errorLabelFechaNac = tk.Label(self.ventana2, text = " ")
         self.errorLabelFechaNac.grid(column = 2, row = 6)
-        self.errorLabelFechaNac.configure(foreground = "red")
+        self.errorLabelFechaNac.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN LA NACIONALIDAD
         self.errorLabelNacionalidad = tk.Label(self.ventana2, text = " ")
         self.errorLabelNacionalidad.grid(column = 2, row = 7)
-        self.errorLabelNacionalidad.configure(foreground = "red")
+        self.errorLabelNacionalidad.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN LA FORMA DE PAGO
         self.errorLabelFDP = tk.Label(self.ventana2, text = " ")
         self.errorLabelFDP.grid(column = 2, row = 8)
-        self.errorLabelFDP.configure(foreground = "red")
+        self.errorLabelFDP.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN LA ESTADIA
         self.errorLabelEstadia = tk.Label(self.ventana2, text = " ")
         self.errorLabelEstadia.grid(column = 2, row = 9)
-        self.errorLabelEstadia.configure(foreground = "red")
+        self.errorLabelEstadia.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN LA PATENTE
         self.errorLabelPatente = tk.Label(self.ventana2, text = " ")
         self.errorLabelPatente.grid(column = 2, row = 10)
-        self.errorLabelPatente.configure(foreground = "red")
+        self.errorLabelPatente.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN LA FECHA DEL CHECK-IN
         self.errorLabelIngreso = tk.Label(self.ventana2, text = " ")
         self.errorLabelIngreso.grid(column = 2, row = 11)
-        self.errorLabelIngreso.configure(foreground = "red")
+        self.errorLabelIngreso.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
         #ERROR EN LA FECHA DEL CHECK-OUT
         self.errorLabelSalida = tk.Label(self.ventana2, text = " ")
         self.errorLabelSalida.grid(column = 2, row = 12)
-        self.errorLabelSalida.configure(foreground = "red")
+        self.errorLabelSalida.configure(foreground="red", background = "#181818", font=('times 11 italic'))
+
+        #ERROR EN LA HABITACIÓN SELECCIONADA
+        self.errorLabelHab = tk.Label(self.ventana2, text = " ")
+        self.errorLabelHab.grid(column = 2, row = 13)
+        self.errorLabelHab.configure(foreground="red", background = "#181818", font=('times 11 italic'))
 
 ###################################################  LÓGICA DE LA VENTANA REGISTRO  ###############################################################################
     def logicaRegistro(self):
@@ -291,9 +299,9 @@ class RegistroHuesped:
         self.nombre = self.nombreIngresado.get()
         self.apellido = self.apellidoIngresado.get()
         self.dni = self.dniIngresado.get()
-        self.largo = len(self.dni)
+        #self.largo = len(self.dni)
         self.tel = self.telIngresado.get()
-        self.cantDigitos = len(self.tel)
+        #self.cantDigitos = len(self.tel)
         self.email = self.correoIngresado.get()
         self.direccion = self.dirIngresada.get()
         self.fecha = self.fechaIngresada.get()
@@ -305,7 +313,19 @@ class RegistroHuesped:
         self.salida = self.fechaDeSalida.get()
         
 ####################################################   verificar nombre  ##########################################################################
-        if(self.nombre.isalpha() == False):
+        self.nombreValido = True
+        if(len(self.nombre) <= 0):
+            self.nombreValido = False
+        else:
+            for i in self.nombre:
+                if(i.isalpha()):
+                    self.nombreValido = True
+                else:
+                    self.nombreValido = False
+                    break
+                pass
+            
+        if(self.nombreValido == False):
             self.condicion = self.condicion - 1
             self.errorLabelNombre['text'] = "Nombre ingresado no válido"
         else:
@@ -313,7 +333,19 @@ class RegistroHuesped:
             self.errorLabelNombre['text'] = " "
 
 ####################################################  Verificar Apellido  ##########################################################################
-        if(self.apellido.isalpha() == False):
+        self.apellidoValido = True
+        if(len(self.apellido) <= 0):
+            self.apellidoValido = False
+        else:
+            for i in self.apellido:
+                if(i.isalpha()):
+                    self.apellidoValido = True
+                else:
+                    self.apellidoValido = False
+                    break
+                pass
+        
+        if(self.apellidoValido == False):
             self.condicion = self.condicion - 1
             self.errorLabelApellido['text'] = "Apellido ingresado no válido"
         else:
@@ -321,7 +353,21 @@ class RegistroHuesped:
             self.errorLabelApellido['text'] = " "
 
 ####################################################  Verificar DNI  ##########################################################################
-        if(self.dni.isdigit() == False or (self.largo > 8 or self.largo < 7)):
+        self.dniValido = True
+        #Primero valido el largo sin importar de qué tipo sean los caracteres
+        if(len(self.dni) > 8 or len(self.dni) < 7):
+            self.dniValido = False
+        else:
+            #Si el largo es correcto me fijo que sean todos números
+            for i in self.dni:
+                if(i.isdigit()):
+                    self.dniValido = True
+                else: 
+                    self.dniValido = False
+                    break
+                pass
+        
+        if(self.dniValido == False):
             self.condicion = self.condicion - 1
             self.errorLabelDNI['text'] = "DNI ingresado no válido"
         else:
@@ -329,7 +375,19 @@ class RegistroHuesped:
             self.errorLabelDNI['text'] = " "
 
 ####################################################  Verificar teléfono  ##########################################################################
-        if(self.tel.isdigit() == False or (self.cantDigitos != 10)):
+        self.telefonoValido = True
+        if(len(self.tel) != 10 or len(self.tel) <= 0):
+            self.telefonoValido = False
+        else:
+            for i in self.tel:
+                if(i.isdigit()):
+                    self.telefonoValido = True
+                else:
+                    self.telefonoValido = False
+                    break
+                pass
+        
+        if(self.telefonoValido == False):
             self.condicion = self.condicion - 1
             self.errorLabelTel['text'] = "Teléfono ingresado no válido"
         else:
@@ -348,7 +406,7 @@ class RegistroHuesped:
                 elif(i.isdigit()):
                     emailValido = True
                 elif(i.isalpha() == False or i.isdigit() == False):
-                    if(i != "@" and i != "." and i != "_" and i != "_"):
+                    if(i != "@" and i != "." and i != "-" and i != "_"):
                         emailValido = False
                         break                
             pass
@@ -416,8 +474,8 @@ class RegistroHuesped:
         elif(self.enteroDia < 1 or self.enteroDia > 31):
             fechaValida = False
 
-        if(self.enteroMes == 1 and self.enteroMes == 3 and self.enteroMes == 5 and self.enteroMes == 7 and self.enteroMes == 8
-            and self.enteroMes == 10 and self.enteroMes == 12 or (self.enteroDia > 31)):
+        if((self.enteroMes == 1 or self.enteroMes == 3 or self.enteroMes == 5 or self.enteroMes == 7 or self.enteroMes == 8
+            or self.enteroMes == 10 or self.enteroMes == 12) and (self.enteroDia > 31)):
             print("El mes ingresado no contiene esa cantidad de días 31+")
             fechaValida = False
         elif((self.enteroMes == 4 or self.enteroMes == 6 or self.enteroMes == 9 or self.enteroMes == 11) and (self.enteroDia > 30)):
@@ -464,13 +522,14 @@ class RegistroHuesped:
 #####################################################  Verificar Estadía(cant noches)  ##########################################################################
         estadiaValida = False
         for i in self.estadia:
-            if(i.isalpha() == True):
-                estadiaValida = True
-            elif(i.isdigit()== True):
+            if(i.isdigit()== True):
                 estadiaValida = True
             else:
                 estadiaValida = False
             pass
+
+        if(int(self.estadia) == 0):
+            estadiaValida = False
 
         if(estadiaValida == False):
             self.condicion = self.condicion - 1
@@ -481,14 +540,18 @@ class RegistroHuesped:
 
 #######################################################  Verificar Patente  ##########################################################################
         patenteValida = False
-        for i in self.patente:
-            if(i.isalpha() == True):
-                patenteValida = True
-            elif(i.isdigit() == True):
-                patenteValida = True
-            else:
-                patenteValida = False
-            pass
+        if(len(self.patente) <= 0):
+            patenteValida = False
+        else: 
+            for i in self.patente:
+                if(i.isalpha() == True):
+                    patenteValida = True
+                elif(i.isdigit() == True):
+                    patenteValida = True
+                else:
+                    patenteValida = False
+                pass
+
         if(patenteValida == False):
             self.condicion = self.condicion - 1
             self.errorLabelPatente['text'] = "Patente ingresada no válida"
@@ -502,29 +565,37 @@ class RegistroHuesped:
 
 ########################################################  Verificar Fecha Salida  ##########################################################################
 
-        
+
+        if(len(self.salida) <= 0):
+            self.errorLabelSalida['text'] = "La fecha ingresada no es válida"
+        else: 
+            self.errorLabelSalida['text'] = " "
         self.condicion = self.condicion + 1
+
         #print("Condicion final: ")
         #print(self.condicion)
 
-
 ########################################################  Verificar Disponibilidad  ##########################################################################       
-        if(self.habitacion>0 and self.habitacion<19):
+        self.habitacionValida = True
+        if(self.habitacion <= 0 or self.habitacion > 18):
+            self.habitacionValida = False
+        else:
             for i in str(self.habitacion):
-                if(i.isalpha()):
+                if(i.isdigit()):
+                    self.habitacionValida = True
+                else:
                     self.habitacionValida = False
                     break
-
-                elif(i.isdigit()):
-                    self.habitacionValida = True               
-            pass
+                pass
             
         if(self.habitacionValida):
             self.condicion = self.condicion + 1
+            self.errorLabelHab['text'] = "Se ha ingresado con éxito"
             self.IngresoCliente()
         
         else:
             self.condicion = self.condicion - 1
+            self.errorLabelHab['text'] = "Habitación seleccionada no válida"
             
 ##################################################  MÉTODOS  ##########################################################################################
     
@@ -567,6 +638,7 @@ class RegistroHuesped:
         self.ventana3 = tk.Toplevel(ventana)
         self.ventana3.title("Huéspedes")
         self.ventana3.geometry("500x450")
+        self.ventana3.configure(background = "#181818")
         self.center(self.ventana3)
         self.ventana3.resizable(0,0)
 
@@ -576,7 +648,7 @@ class RegistroHuesped:
 
         self.labelBusqueda = tk.Label(self.ventana3, text = "DNI: ")
         self.labelBusqueda.grid(column = 0, row = 0, padx = 4, pady = 6)
-        self.labelBusqueda.configure(foreground = "Black")
+        self.labelBusqueda.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso del criterio de búsqueda, con el que se va a hacer la consulta a la base de datos
         self.criterioBusqueda = tk.StringVar()
         self.inputBusqueda = tk.Entry(self.ventana3, width = 30, textvariable = self.criterioBusqueda)
@@ -585,12 +657,12 @@ class RegistroHuesped:
         self.labelTituloMuestra = tk.Label(self.ventana3, text = "Resultados de la búsqueda")
         self.labelTituloMuestra.grid(column = 1, row = 3, padx = 4, pady = 6)
         #self.labelTituloMuestra.place(x = 175, y = 50)
-        self.labelTituloMuestra.config(fg = "Black", font = ("Chilanka",16))
+        self.labelTituloMuestra.config(bg="#181818" ,fg = "White", font = ("Chilanka",16))
 
 ##################################################  Nombre  ##############################################################################################
         self.labelNombreMuestra = tk.Label(self.ventana3, text = "Nombre: ")
         self.labelNombreMuestra.grid(column = 0, row = 4, padx = 50, pady = 6)
-        self.labelNombreMuestra.configure(foreground = "Black")
+        self.labelNombreMuestra.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Obtención de datos, acá tiene que hacer la consulta a la base de datos, traer la info y llenar los campos
         self.nombreObtenido = tk.StringVar()
         self.muestraNombre = tk.Entry(self.ventana3, width = 30, textvariable = self.nombreObtenido, state = "readonly")
@@ -599,7 +671,7 @@ class RegistroHuesped:
 ##################################################  Apellido  ##############################################################################################
         self.labelApellidoMuestra = tk.Label(self.ventana3, text = "Apellidos: ")
         self.labelApellidoMuestra.grid(column = 0, row = 5, padx = 50, pady = 6)
-        self.labelApellidoMuestra.configure(foreground = "Black")
+        self.labelApellidoMuestra.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.apellidoObtenido = tk.StringVar()
         self.muestraApellido = tk.Entry(self.ventana3, width = 30, textvariable = self.apellidoObtenido, state = "readonly")
@@ -608,7 +680,7 @@ class RegistroHuesped:
 ##################################################  DNI  ##############################################################################################
         self.labelDNIMuestra = tk.Label(self.ventana3, text = "DNI: ")
         self.labelDNIMuestra.grid(column = 0, row = 6, padx = 50, pady = 6)
-        self.labelDNIMuestra.configure(foreground = "Black")
+        self.labelDNIMuestra.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.dniObtenido = tk.StringVar()
         self.muestraDNI = tk.Entry(self.ventana3, width = 30, textvariable = self.dniObtenido, state = "readonly")
@@ -617,7 +689,7 @@ class RegistroHuesped:
 ##################################################  Telefono  ##############################################################################################
         self.labelTelMuestra = tk.Label(self.ventana3, text = "Teléfono: ")
         self.labelTelMuestra.grid(column = 0, row = 7, padx = 50, pady = 6)
-        self.labelTelMuestra.configure(foreground = "Black")
+        self.labelTelMuestra.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.telObtenido = tk.StringVar()
         self.muestraTel = tk.Entry(self.ventana3, width = 30, textvariable = self.telObtenido, state = "readonly")
@@ -626,7 +698,7 @@ class RegistroHuesped:
 ##################################################  Nacionalidad  ##############################################################################################
         self.labelNacMuestra = tk.Label(self.ventana3, text = "Nacionalidad: ")
         self.labelNacMuestra.grid(column = 0, row = 8, padx = 50, pady = 6)
-        self.labelNacMuestra.configure(foreground = "Black")
+        self.labelNacMuestra.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.nacionalidadObtenida = tk.StringVar()
         self.muestraNacion = tk.Entry(self.ventana3, width = 30, textvariable = self.nacionalidadObtenida, state = "readonly")
@@ -635,7 +707,7 @@ class RegistroHuesped:
 ##################################################  Estadia  ##############################################################################################
         self.labelMuestraEstadia = tk.Label(self.ventana3, text = "Estadía: ")
         self.labelMuestraEstadia.grid(column = 0, row = 9, padx = 50, pady = 6)
-        self.labelMuestraEstadia.configure(foreground = "Black")
+        self.labelMuestraEstadia.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.estadiaObtenida = tk.StringVar()
         self.muestraEstadia = tk.Entry(self.ventana3, width = 30, textvariable = self.estadiaObtenida, state = "readonly")
@@ -644,7 +716,7 @@ class RegistroHuesped:
 ##################################################  Check-in  ##############################################################################################
         self.labelMuestraIngreso = tk.Label(self.ventana3, text = "Check-in: ")
         self.labelMuestraIngreso.grid(column = 0, row = 10, padx = 50, pady = 6)
-        self.labelMuestraIngreso.configure(foreground = "Black")
+        self.labelMuestraIngreso.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.ingresoObtenido = tk.StringVar()
         self.muestraIngreso = tk.Entry(self.ventana3, width = 30, textvariable = self.ingresoObtenido, state = "readonly")
@@ -653,7 +725,7 @@ class RegistroHuesped:
 ##################################################  Check-out  ##############################################################################################
         self.labelMuestraSalida = tk.Label(self.ventana3, text = "Check-out: ")
         self.labelMuestraSalida.grid(column = 0, row = 11, padx = 50, pady = 6)
-        self.labelMuestraSalida.configure(foreground = "Black")
+        self.labelMuestraSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.salidaObtenida = tk.StringVar()
         self.muestraSalida = tk.Entry(self.ventana3, width = 30, textvariable = self.salidaObtenida, state = "readonly")
@@ -662,10 +734,10 @@ class RegistroHuesped:
 ######################################################  BOTONES VENTANA 3  ######################################################################################
 
         self.botonValidar = tk.Button(self.ventana3, text = "Consultar", command=lambda: self.LogicaLista(), background="#5FBD94", activebackground="#6BD8A9")
-        self.botonValidar.place(x = 275, y = 390, width = 80, height = 45)
+        self.botonValidar.place(x = 275, y = 400, width = 80, height = 45)
 
         self.botonCerrar = tk.Button(self.ventana3, text = "Cerrar", command=lambda:self.CerrarLista(self.ventana3), background="#D76458", activebackground="#FF7A6C")
-        self.botonCerrar.place(x = 175, y = 390, width = 80, height = 45)
+        self.botonCerrar.place(x = 175, y = 400, width = 80, height = 45)
 
         self.botonBuscar = tk.Button(self.ventana3, text = "Buscar", command=lambda:self.BusquedaCliente(), background="#D8D8D8", activebackground="#EAEDEC")
         self.botonBuscar.grid(column = 1, row = 2, padx = 4, pady = 6)
@@ -700,22 +772,19 @@ class RegistroHuesped:
     def CerrarLista(self, ventana3):
         self.ventana3.destroy()
 
-    
-
-
-
 ######################################################  CREACIÓN DE LA VENTANA DE CHECK OUT  ######################################################################################
 
     def CheckOut(self, ventana):
         self.ventana4 = tk.Toplevel(ventana)
         self.ventana4.title("Check-Out")
-        self.ventana4.geometry("500x590")
+        self.ventana4.geometry("500x600")
+        self.ventana4.configure(background = "#181818")
         self.center(self.ventana4)
         self.ventana4.resizable(0,0)
 
         self.lblBusquedaOut = tk.Label(self.ventana4, text = "Búsqueda: ")
         self.lblBusquedaOut.grid(column = 0, row = 0, padx = 4, pady = 6)
-        self.lblBusquedaOut.configure(foreground = "Black")
+        self.lblBusquedaOut.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #Ingreso del criterio de búsqueda, con el que se va a hacer la consulta a la base de datos
         self.entradaBusqueda = tk.StringVar()
         self.inputBusquedaEntrada = tk.Entry(self.ventana4, width = 30, textvariable = self.entradaBusqueda)
@@ -724,12 +793,12 @@ class RegistroHuesped:
         self.labelTituloMuestra = tk.Label(self.ventana4, text = "Resultados de la búsqueda")
         self.labelTituloMuestra.grid(column = 1, row = 3)
         #self.labelTituloMuestra.place(x = 175, y = 50)
-        self.labelTituloMuestra.config(fg = "Black", font = ("Chilanka",16))
+        self.labelTituloMuestra.config(bg= "#181818", fg = "White", font = ("Chilanka",16))
 
 ##################################################  Nombre  ##############################################################################################
         self.lblNombreSalida = tk.Label(self.ventana4, text = "Nombre: ")
         self.lblNombreSalida.grid(column = 0, row = 4, padx = 25, pady = 6)
-        self.lblNombreSalida.configure(foreground = "Black")
+        self.lblNombreSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.nombreSalida = tk.StringVar()
         self.muestraNombreSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.nombreSalida, state = "readonly")
@@ -738,7 +807,7 @@ class RegistroHuesped:
 ##################################################  Apellido  ##############################################################################################
         self.lblApellidoSalida = tk.Label(self.ventana4, text = "Apellido")
         self.lblApellidoSalida.grid(column = 0, row = 5, padx = 25, pady = 6)
-        self.lblApellidoSalida.configure(foreground = "Black")
+        self.lblApellidoSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.apellidoSalida = tk.StringVar()
         self.muestraApellidoSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.apellidoSalida, state = "readonly")
@@ -747,7 +816,7 @@ class RegistroHuesped:
 ##################################################  DNI  ##############################################################################################
         self.lblDniSalida = tk.Label(self.ventana4, text = "DNI: ")
         self.lblDniSalida.grid(column = 0, row = 6, padx = 25, pady = 6)
-        self.lblDniSalida.configure(foreground = "Black")
+        self.lblDniSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.dniSalida = tk.StringVar()
         self.muestraDNISalida = tk.Entry(self.ventana4, width = 30, textvariable = self.dniSalida, state = "readonly")
@@ -756,7 +825,7 @@ class RegistroHuesped:
 ##################################################  Telefono  ##############################################################################################
         self.lblTelSalida = tk.Label(self.ventana4, text = "Teléfono: ")
         self.lblTelSalida.grid(column = 0, row = 7, padx = 25, pady = 6)
-        self.lblTelSalida.configure(foreground = "Black")
+        self.lblTelSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.telSalida = tk.StringVar()
         self.muestraTelSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.telSalida, state = "readonly")
@@ -765,7 +834,7 @@ class RegistroHuesped:
 ##################################################  Email  ##############################################################################################
         self.lblEmailSalida = tk.Label(self.ventana4, text = "Email: ")
         self.lblEmailSalida.grid(column = 0, row = 8, padx = 25, pady = 6)
-        self.lblEmailSalida.configure(foreground = "Black")
+        self.lblEmailSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.emailSalida = tk.StringVar()
         self.muestraEmailSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.emailSalida, state = "readonly")
@@ -774,7 +843,7 @@ class RegistroHuesped:
 ##################################################  Domicilio  ##############################################################################################
         self.lblDomicilioSalida = tk.Label(self.ventana4, text = "Domicilio: ")
         self.lblDomicilioSalida.grid(column = 0, row = 9, padx = 25, pady = 6)
-        self.lblDomicilioSalida.configure(foreground = "Black")
+        self.lblDomicilioSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.dirSalida = tk.StringVar()
         self.muestraDirSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.dirSalida, state = "readonly")
@@ -783,7 +852,7 @@ class RegistroHuesped:
 ##################################################  Fecha Nacimiento  ##############################################################################################
         self.lblFechaNacSalida = tk.Label(self.ventana4, text = "Fecha de Nacimiento: ")
         self.lblFechaNacSalida.grid(column = 0, row = 10, padx = 25, pady = 6)
-        self.lblFechaNacSalida.configure(foreground = "Black")
+        self.lblFechaNacSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.fechaNacSalida = tk.StringVar()
         self.muestraFechaNacSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.fechaNacSalida, state = "readonly")
@@ -792,7 +861,7 @@ class RegistroHuesped:
 ##################################################  Nacionalidad  ##############################################################################################
         self.lblNacionalidadSalida = tk.Label(self.ventana4, text = "Nacionalidad: ")
         self.lblNacionalidadSalida.grid(column = 0, row = 11, padx = 25, pady = 6)
-        self.lblNacionalidadSalida.configure(foreground = "Black")
+        self.lblNacionalidadSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.nacionSalida = tk.StringVar()
         self.muestraNacionSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.nacionSalida, state = "readonly")
@@ -801,7 +870,7 @@ class RegistroHuesped:
 ##################################################  Forma de Pago  ##############################################################################################
         self.lblFDPSalida = tk.Label(self.ventana4, text = "Forma de Pago: ")
         self.lblFDPSalida.grid(column = 0, row = 12, padx = 25, pady = 6)
-        self.lblFDPSalida.configure(foreground = "Black")
+        self.lblFDPSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.formaSalida = tk.StringVar()
         self.muestraFormaSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.formaSalida, state = "readonly")
@@ -810,7 +879,7 @@ class RegistroHuesped:
 ##################################################  Estadia  ##############################################################################################
         self.lblEstadiaSalida = tk.Label(self.ventana4, text = "Estadía: ")
         self.lblEstadiaSalida.grid(column = 0, row = 13, padx = 25, pady = 6)
-        self.lblEstadiaSalida.configure(foreground = "Black")
+        self.lblEstadiaSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.estSalida = tk.StringVar()
         self.muestraEstSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.estSalida, state = "readonly")
@@ -819,7 +888,7 @@ class RegistroHuesped:
 ##################################################  Patente  ##############################################################################################
         self.lblPatenteSalida = tk.Label(self.ventana4, text = "Patente: ")
         self.lblPatenteSalida.grid(column = 0, row = 14, padx = 25, pady = 6)
-        self.lblPatenteSalida.configure(foreground = "Black")
+        self.lblPatenteSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.patSalida = tk.StringVar()
         self.muestraPatSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.patSalida, state = "readonly")
@@ -828,7 +897,7 @@ class RegistroHuesped:
 ##################################################  Chechk-in  ##############################################################################################        
         self.lblChinSalida = tk.Label(self.ventana4, text = "Check-in: ")
         self.lblChinSalida.grid(column = 0, row = 15, padx = 25, pady = 6)
-        self.lblChinSalida.configure(foreground = "Black")
+        self.lblChinSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.chinSalida = tk.StringVar()
         self.muestraChinSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.chinSalida, state = "readonly")
@@ -837,7 +906,7 @@ class RegistroHuesped:
 ##################################################  Check-out  ##############################################################################################
         self.lblCoutSalida = tk.Label(self.ventana4, text = "Check-out: ")
         self.lblCoutSalida.grid(column = 0, row = 16, padx = 25, pady = 6)
-        self.lblCoutSalida.configure(foreground = "Black")
+        self.lblCoutSalida.configure(foreground = "White", background = "#181818", font=('times 11 italic'))
         #
         self.coutSalida = tk.StringVar()
         self.muestraCoutSalida = tk.Entry(self.ventana4, width = 30, textvariable = self.coutSalida, state = "readonly")
@@ -845,10 +914,10 @@ class RegistroHuesped:
 
 ##################################################  BOTONES VENTANA 4 CHK-OUT  ##############################################################################################
         self.botonValidar = tk.Button(self.ventana4, text = "Confirmar", command=lambda: self.EliminarCliente(), background="#5FBD94", activebackground="#6BD8A9")
-        self.botonValidar.place(x = 275, y = 540, width = 80, height = 45)
+        self.botonValidar.place(x = 275, y = 550, width = 80, height = 45)
 
         self.botonCerrar = tk.Button(self.ventana4, text = "Cerrar", command=lambda:self.CerrarCheckOut(self.ventana4), background="#D76458", activebackground="#FF7A6C")
-        self.botonCerrar.place(x = 175, y = 540, width = 80, height = 45)
+        self.botonCerrar.place(x = 175, y = 550, width = 80, height = 45)
 
         self.botonBusqueda = tk.Button(self.ventana4, text = "Buscar", command=lambda:self.Busqueda(), background="#D8D8D8", activebackground="#EAEDEC")
         self.botonBusqueda.grid(column = 1, row = 2, padx = 4, pady = 6)
