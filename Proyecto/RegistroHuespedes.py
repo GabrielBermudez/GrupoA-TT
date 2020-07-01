@@ -217,7 +217,7 @@ class RegistroHuesped:
         self.botonCerrar.place(x = 370, y = 495, width = 80, height = 45)
 
         self.botonVerificar = tk.Button(self.ventana2, text = "Verificar Hab.",  command=lambda:self.VerifHabitacion(), background="#C1C1C1", activebackground="#DADADA")
-        self.botonVerificar.place(x = 198, y = 475, width = 120, height = 45)
+        self.botonVerificar.place(x = 198, y = 495, width = 120, height = 45)
 
 ##################################################  ETIQUETAS DE LOS ERRORES  ####################################################################
 
@@ -318,7 +318,7 @@ class RegistroHuesped:
             self.nombreValido = False
         else:
             for i in self.nombre:
-                if(i.isalpha()):
+                if(i.isalpha() or i==" "):
                     self.nombreValido = True
                 else:
                     self.nombreValido = False
@@ -733,21 +733,16 @@ class RegistroHuesped:
 
 ######################################################  BOTONES VENTANA 3  ######################################################################################
 
-        self.botonValidar = tk.Button(self.ventana3, text = "Consultar", command=lambda: self.LogicaLista(), background="#5FBD94", activebackground="#6BD8A9")
-        self.botonValidar.place(x = 275, y = 400, width = 80, height = 45)
 
         self.botonCerrar = tk.Button(self.ventana3, text = "Cerrar", command=lambda:self.CerrarLista(self.ventana3), background="#D76458", activebackground="#FF7A6C")
-        self.botonCerrar.place(x = 175, y = 400, width = 80, height = 45)
+        self.botonCerrar.place(x = 220, y = 400, width = 80, height = 45)
 
         self.botonBuscar = tk.Button(self.ventana3, text = "Buscar", command=lambda:self.BusquedaCliente(), background="#D8D8D8", activebackground="#EAEDEC")
         self.botonBuscar.grid(column = 1, row = 2, padx = 4, pady = 6)
 
 ###################################################  LÓGICA DE LA VENTANA LISTA HUESPEDES  ###############################################################################
-    def LogicaLista(self):
-        print("Holiiiiiii")
-        print("Esto creo que no va a hacer falta")
-        
-    
+   
+
     def BusquedaCliente(self):
         self.dni=self.criterioBusqueda.get()
 
@@ -757,7 +752,6 @@ class RegistroHuesped:
         self.datosCliente=self.cursor.fetchone()
         self.conexion.commit()
         self.conexion.close()
-        print(self.datosCliente)
 
         self.nombreObtenido.set(self.datosCliente[2])
         self.apellidoObtenido.set(self.datosCliente[3])

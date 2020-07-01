@@ -5,15 +5,15 @@ import time as tm
 import sys
 import time
 from datetime import date
-from Login import Ingreso
-from Registro import Registro
+from Login import *
+from Registro import *
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 
 
 class Luxury:
 
-    def FrontHome(self):
+    def __init__(self):
         #creacion de la ventana
         self.ventanaHome = tk.Tk()
         self.ventanaHome.title("LUXURY")
@@ -22,7 +22,7 @@ class Luxury:
         self.ventanaHome.configure(bg= 'black')
         self.frameTitulo=ttk.Label(self.ventanaHome, text="Luxury")
         self.frameTitulo.config(background = "black", foreground="white",font='times 38 bold italic underline')
-        self.frameTitulo.pack(anchor=CENTER)
+        self.frameTitulo.place(x=330,y=10)
         self.center(self.ventanaHome)
 
         
@@ -39,7 +39,7 @@ class Luxury:
         self.imagenLogo = self.imagenLogo.resize((350,350), Image.ANTIALIAS) # Redimension (Alto, Ancho)
         self.imagenLogo = ImageTk.PhotoImage(self.imagenLogo) 
         self.labelLogo = tk.Label(self.ventanaHome, text="", image=self.imagenLogo, bg="black")
-        self.labelLogo.place(x=70,y=50)
+        self.labelLogo.place(x=100,y=70)
         #fecha
         self.fecha = date.today()
         self.fecha1=tk.Label(self.ventanaHome, text=self.fecha, font='times 20 italic')
@@ -77,7 +77,7 @@ class Luxury:
         win.geometry('{}x{}+{}+{}'.format(width, height, x, y))   
 
 luxury = Luxury()
-luxury.FrontHome()
+
 
 
 

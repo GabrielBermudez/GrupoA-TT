@@ -54,7 +54,7 @@ class Ingreso:
 
         self.ventanaLogin.grab_set()
         
-        self.ventanaLogin.mainloop()
+        #self.ventanaLogin.mainloop()
 
     def LogicaLogin(self,ventanaPrincipal):
        
@@ -70,7 +70,7 @@ class Ingreso:
         if(self.datos and ((self.correoInput == self.datos[0] or self.correoInput == self.datos[1]) and bcrypt.checkpw(self.contraseñaInput, self.datos[2]))):
             menu = Menu()
 
-            mb.showinfo("Bienvenido", "Bienvenido al sistema de Administracion Hotelera Luxury")
+            #mb.showinfo("Bienvenido", "Bienvenido al sistema de Administracion Hotelera Luxury")
             self.ventanaLogin.destroy()
            
             ventanaPrincipal.destroy()
